@@ -1,13 +1,13 @@
 import React from 'react';
 import s from './Profile.module.css';
 
-
-export const Profile = () => {
+export const Profile = (props) => {
   let newPost = React.createRef();
 
   let addPost = () => {
+    debugger;
     let text = newPost.current.value;
-    alert(text);
+    props.addPotsEv(text);
   };
 
   return (
@@ -15,7 +15,7 @@ export const Profile = () => {
       <div className={s.Profile}>
         <div className={s.AvaInf}>
           <div>
-            <img src='' />
+            <img src="" />
           </div>
           {/* Ava and prfl inf */}
           <p>Big Scary Dog, 5y</p>

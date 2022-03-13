@@ -15,7 +15,7 @@ export const Content = (props) => {
 
   return (
     <div className={s.Content}>
-      <Profile />
+      <Profile  addPotsEv={props.addPotsEv}/>
 
       <Routes>
         {myMsgs}
