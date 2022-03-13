@@ -1,0 +1,27 @@
+
+
+.App {
+  display: grid;
+  grid-template-areas:
+  'h h'
+  'n c'
+  'f f';
+  grid-template-columns: 2fr 10fr;
+  grid-template-rows: 60px 10fr;
+  position: relative;
+  height: 100%;
+  background: black;
+  
+}
+
+.App::before{
+  content: '';
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background: no-repeat center fixed url('https://www.desktopbackground.org/p/2011/10/25/286428_download-tropical-beach-wallpapers-high-quality-resolution_1920x1200_h.jpg');
+  background-size: cover;
+  opacity: 0.5;
+}

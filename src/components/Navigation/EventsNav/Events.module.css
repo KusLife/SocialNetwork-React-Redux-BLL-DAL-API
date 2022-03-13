@@ -1,0 +1,17 @@
+
+
+.wraperEv {
+  display: flex;
+  flex-direction: column;
+}
+.Ev_Item {
+  /* position: relative; */
+  margin: 20px;
+  background: rgba(223, 217, 217, 0.5 );
+  padding: 20px;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 10px; 
+  outline: 2px solid rgb(222, 241, 139);
+  /* box-shadow: 5px 5px 10px 2px rgb(204, 233, 197) ; */
+}

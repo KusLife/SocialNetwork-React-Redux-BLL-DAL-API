@@ -1,0 +1,31 @@
+
+
+
+.Msg {
+  display: flex;
+  margin: 0px 0px 10px 20px;
+  padding: 0px 10px 0px 10px;
+  background: rgba(223, 217, 217, 0.5 );
+  min-width: 20%;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 10px; 
+  outline: 2px solid rgb(147, 241, 139);
+}
+
+.msgTxt {
+  background: rgba(223, 217, 217, 0.5 );
+  padding: 5px;
+  /* min-width: 20px; */
+  /* width: fit-content; */
+  height: fit-content;
+  border-radius: 10px; 
+  outline: 2px solid rgb(147, 241, 139);
+}
+
+.time {
+  color: rgb(147, 241, 139);
+  padding: 0px 0px 0px 10px;
+  align-self: end;
+  justify-self: top;
+}

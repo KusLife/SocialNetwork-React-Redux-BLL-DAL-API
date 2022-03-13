@@ -1,0 +1,36 @@
+.Navigation {
+  grid-area: n;
+  background: url('../../pic/palms.jpg');
+  padding: 25px;
+  box-shadow: inset -5px -5px 15px 5px rgb(252, 243, 230);
+  position: relative;
+  font-size: 20px;
+  min-width: 250px;
+}
+
+.item {
+  font-size: 30px;
+}
+
+.active {
+  text-decoration: none;
+  font-size: 40px;
+  color: blueviolet;
+}
+
+.item a {
+  text-decoration: none;
+  color: brown;
+  
+}
+
+.item a.active  {
+  text-decoration: none;
+  color: rgb(41, 180, 138);
+  
+}
+
+.item a:focus {
+  color: rgb(10, 175, 24);
+}
+
