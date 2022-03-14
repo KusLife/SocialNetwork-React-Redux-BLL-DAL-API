@@ -1,13 +1,19 @@
 import React from 'react';
 import s from './Profile.module.css';
+import Spitz from '../../../pic/Spitz.jpg';
 
 export const Profile = (props) => {
   let newPost = React.createRef();
 
   let addPost = () => {
-    debugger;
     let text = newPost.current.value;
     props.addPotsEv(text);
+    newPost.current.value = '';
+  };
+
+  let onChangePost = () => {
+    let text = newPost.current.value;
+    props.updateNewPostTxt(text);
   };
 
   return (
@@ -15,13 +21,19 @@ export const Profile = (props) => {
       <div className={s.Profile}>
         <div className={s.AvaInf}>
           <div>
-            <img src="" />
+            {/* Why it does't work!??
+              <img src='../../../pic/Spitz.jpg' /> */}
+            <img src={Spitz} />
           </div>
           {/* Ava and prfl inf */}
           <p>Big Scary Dog, 5y</p>
         </div>
         <div>Date new EVENT:)</div>
-        <textarea ref={newPost}></textarea>
+        <textarea
+          onChange={onChangePost}
+          ref={newPost}
+          value={props.newPostTxt}
+        />
         <button onClick={addPost}>Post</button>
       </div>
     </div>

@@ -11,7 +11,7 @@ export const Respons = () => {
         <div  className={s.RAvaInf}>
         <img src={cat1}></img>
         </div>
-        <span>Likes 2</span>
+        <h3>Jhony Gray</h3>
         < RMsgs/>
       </div>
     
