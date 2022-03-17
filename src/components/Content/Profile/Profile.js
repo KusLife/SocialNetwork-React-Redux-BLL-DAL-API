@@ -6,9 +6,8 @@ export const Profile = (props) => {
   let newPost = React.createRef();
 
   let addPost = () => {
-    let text = newPost.current.value;
-    props.addPotsEv(text);
-    newPost.current.value = '';
+    props.addPotsEv();
+    props.updateNewPostTxt('');
   };
 
   let onChangePost = () => {

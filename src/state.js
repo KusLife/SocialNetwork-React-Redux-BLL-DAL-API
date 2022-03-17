@@ -1,4 +1,6 @@
-import { rerenderWholeTree } from './render';
+let rerenderWholeTree = () => {
+ 
+}
 
 export let state = {
   eventsData: [
@@ -23,18 +25,24 @@ export let state = {
   // updateNewPostTxt: { updateNewPostTxt },
 };
 
-export let addPotsEv = (PostEv) => {
+window.state = state
+
+export const addPotsEv = () => {
   let newPostEv = {
     key: '',
     id: 6,
     data: '11.5.22',
-    ev: PostEv,
+    ev: state.newPostTxt,
   };
   state.eventsData.push(newPostEv);
   rerenderWholeTree(state);
 };
 
-export let updateNewPostTxt = (updateTxt) => {
+export const updateNewPostTxt = (updateTxt) => {
   state.newPostTxt = updateTxt;
   rerenderWholeTree(state);
 };
+
+export const communicator = (observer) => {
+  rerenderWholeTree = observer
+}
