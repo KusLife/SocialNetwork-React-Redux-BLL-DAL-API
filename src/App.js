@@ -4,7 +4,7 @@ import { Header } from './components/Header/Header';
 import { Navigation } from './components/Navigation/Navigation';
 import { Content } from './components/Content/Content';
 import { Footer } from './components/Footer/Footer';
-import {updateNewPostTxt} from './state'
+// import {updateNewPostTxt} from './state'
 
 
 
@@ -17,7 +17,7 @@ function App(props) {
 
       <Content state={props.state}
        addPotsEv={props.addPotsEv}
-       updateNewPostTxt={updateNewPostTxt}/>
+       updateNewPostTxt={props.updateNewPostTxt}/>
 
       <Footer />
     </div>

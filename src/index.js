@@ -1,5 +1,5 @@
 import reportWebVitals from './reportWebVitals';
-import { state, addPotsEv, communicator } from './state';
+import store from './store';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -12,17 +12,17 @@ let rerenderWholeTree = (state) => {
       <BrowserRouter>
         <App
           state={state}
-          addPotsEv={addPotsEv}
-          updateNewPostTxt={state.updateNewPostTxt}
+          addPotsEv={store.addPotsEv.bind(store)}
+          updateNewPostTxt={store.updateNewPostTxt.bind(store)}
         />
       </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')
   );
 };
-rerenderWholeTree(state);
+rerenderWholeTree(store.getState());
 
-communicator(rerenderWholeTree);
+store.subscriber(rerenderWholeTree);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
-
 import s from './Navigation.module.css';
 import { EventsList } from './EventsNav/EventsList';
 
@@ -44,7 +43,9 @@ export const Navigation = (props) => {
         <Routes>
           <Route
             path="/EventsList"
-            element={<EventsList eventsData={props.state.eventsData} />}
+            element={
+              <EventsList eventsData={props.state.eventsData} />
+            }
           />
         </Routes>
       </div>
