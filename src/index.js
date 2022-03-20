@@ -6,21 +6,22 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
-let rerenderWholeTree = (state) => {
+let rerenderWholeTree = () => {
   ReactDOM.render(
     <React.StrictMode>
       <BrowserRouter>
         <App
-          state={state}
-          addPotsEv={store.addPotsEv.bind(store)}
-          updateNewPostTxt={store.updateNewPostTxt.bind(store)}
+          store={store}
+          dispatch={store.dispatch.bind(store)}
+          // addPotsEv={store.addPotsEv.bind(store)}
+          // updateNewPostTxt={store.updateNewPostTxt.bind(store)}
         />
       </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')
   );
 };
-rerenderWholeTree(store.getState());
+rerenderWholeTree();
 
 store.subscriber(rerenderWholeTree);
 

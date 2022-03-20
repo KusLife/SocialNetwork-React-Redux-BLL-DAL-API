@@ -4,7 +4,7 @@ import s from './MyMsgs.module.css';
 import { Respons } from '../Respons/Respons';
 
 export const MyMsgs = (props) => {
-  let MsgElements = props.state.textMsg.map((it) => (
+  let MsgElements = props.store.getState().textMsg.map((it) => (
     <Msgs id={it.id} text={it.text} time={it.time} />
   ));
 

@@ -44,7 +44,7 @@ export const Navigation = (props) => {
           <Route
             path="/EventsList"
             element={
-              <EventsList eventsData={props.state.eventsData} />
+              <EventsList eventsData={props.store.getState().eventsData} />
             }
           />
         </Routes>

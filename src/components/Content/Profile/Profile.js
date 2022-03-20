@@ -6,13 +6,15 @@ export const Profile = (props) => {
   let newPost = React.createRef();
 
   let addPost = () => {
-    props.addPotsEv();
-    props.updateNewPostTxt('');
+    props.dispatch({type: 'ADD-POST-EV'})
+    // props.addPotsEv();
+    // props.updateNewPostTxt('');
   };
 
-  let onChangePost = () => {
+  let onChangePost = () => {  
     let text = newPost.current.value;
-    props.updateNewPostTxt(text);
+    props.dispatch({type: 'UPDATE-NEW-POST-TXT', updateTxt: text})
+    // props.updateNewPostTxt(text);
   };
 
   return (
@@ -31,7 +33,7 @@ export const Profile = (props) => {
         <textarea
           onChange={onChangePost}
           ref={newPost}
-          value={props.newPostTxt}
+          value={props.store.getState().newPostTxt}
         />
         <button onClick={addPost}>Post</button>
       </div>

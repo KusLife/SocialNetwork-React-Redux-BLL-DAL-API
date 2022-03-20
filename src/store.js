@@ -22,7 +22,7 @@ let store = {
     // updateNewPostTxt: { updateNewPostTxt },
   },
   _callSubscriber() {},
-  
+
   getState() {
     return this._state;
   },
@@ -30,23 +30,38 @@ let store = {
     this._callSubscriber = observer;
   },
 
-  addPotsEv() {
-    let newPostEv = {
-      key: '',
-      id: 6,
-      data: '11.5.22',
-      ev: this._state.newPostTxt,
-    };
-    this._state.eventsData.push(newPostEv);
-    this._callSubscriber(this._state);
-  },
-  updateNewPostTxt(updateTxt) {
-    this._state.newPostTxt = updateTxt;
-    this._callSubscriber(this._state);
-  },
-
+  // addPotsEv() {
+  //   let newPostEv = {
+  //     key: '',
+  //     id: 6,
+  //     data: '11.5.22',
+  //     ev: this._state.newPostTxt,
+  //   };
+  //   this._state.eventsData.push(newPostEv);
+  //   this._callSubscriber(this._state);
+  // },
+  // updateNewPostTxt(updateTxt) {
+  //   this._state.newPostTxt = updateTxt;
+  //   this._callSubscriber(this._state);
+  // },
   
 
+  dispatch(action) {
+    if (action.type === 'ADD-POST-EV') {
+      let newPostEv = {
+        key: '',
+        id: 6,
+        data: '11.5.22',
+        ev: this._state.newPostTxt,
+      };
+      this._state.eventsData.push(newPostEv);
+      this._callSubscriber(this._state);
+      this.getState().newPostTxt=''
+    } else if (action.type === 'UPDATE-NEW-POST-TXT') {
+      this._state.newPostTxt = action.updateTxt;
+      this._callSubscriber(this._state);  
+    }
+  },
 };
 
 window.store = store;

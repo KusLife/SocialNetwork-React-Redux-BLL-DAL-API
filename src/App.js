@@ -6,18 +6,19 @@ import { Content } from './components/Content/Content';
 import { Footer } from './components/Footer/Footer';
 // import {updateNewPostTxt} from './state'
 
-
-
 function App(props) {
   return (
     <div className="App">
       <Header />
 
-      <Navigation state={props.state} />
+      <Navigation store={props.store} />
 
-      <Content state={props.state}
-       addPotsEv={props.addPotsEv}
-       updateNewPostTxt={props.updateNewPostTxt}/>
+      <Content
+        store={props.store}
+        dispatch={props.dispatch}
+        //  addPotsEv={props.addPotsEv}
+        //  updateNewPostTxt={props.updateNewPostTxt}
+      />
 
       <Footer />
     </div>
