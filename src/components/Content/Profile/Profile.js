@@ -4,26 +4,18 @@ import Spitz from '../../../pic/Spitz.jpg';
 
 export const Profile = (props) => {
   let newPost = React.createRef();
-
   let addPost = () => {
-    props.dispatch({type: 'ADD-POST-EV'})
-    // props.addPotsEv();
-    // props.updateNewPostTxt('');
+    props.store.dispatch({ type: 'ADD-POST-EV' });
   };
-
-  let onChangePost = () => {  
+  let onChangePost = () => {
     let text = newPost.current.value;
-    props.dispatch({type: 'UPDATE-NEW-POST-TXT', updateTxt: text})
-    // props.updateNewPostTxt(text);
+    props.store.dispatch({ type: 'UPDATE-NEW-POST-TXT', updateTxt: text });
   };
-
   return (
     <div>
       <div className={s.Profile}>
         <div className={s.AvaInf}>
           <div>
-            {/* Why it does't work!??
-              <img src='../../../pic/Spitz.jpg' /> */}
             <img src={Spitz} />
           </div>
           {/* Ava and prfl inf */}

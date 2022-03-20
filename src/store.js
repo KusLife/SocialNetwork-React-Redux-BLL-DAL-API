@@ -19,7 +19,6 @@ let store = {
       { id: 4, time: '10:25', text: 'Is your mom okay?' },
       { id: 5, time: '11:02', text: 'As for  me , am well:)' },
     ],
-    // updateNewPostTxt: { updateNewPostTxt },
   },
   _callSubscriber() {},
 
@@ -30,36 +29,28 @@ let store = {
     this._callSubscriber = observer;
   },
 
-  // addPotsEv() {
-  //   let newPostEv = {
-  //     key: '',
-  //     id: 6,
-  //     data: '11.5.22',
-  //     ev: this._state.newPostTxt,
-  //   };
-  //   this._state.eventsData.push(newPostEv);
-  //   this._callSubscriber(this._state);
-  // },
-  // updateNewPostTxt(updateTxt) {
-  //   this._state.newPostTxt = updateTxt;
-  //   this._callSubscriber(this._state);
-  // },
+  _addPotsEv() {
+    let newPostEv = {
+      key: '',
+      id: 6,
+      data: '11.5.22',
+      ev: this._state.newPostTxt,
+    };
+    this._state.eventsData.push(newPostEv);
+    this._callSubscriber(this._state);
+    this.getState().newPostTxt=''
+  },
+  _updateNewPostTxt(updateTxt) {
+    this._state.newPostTxt = updateTxt;
+    this._callSubscriber(this._state);
+  },
   
 
   dispatch(action) {
     if (action.type === 'ADD-POST-EV') {
-      let newPostEv = {
-        key: '',
-        id: 6,
-        data: '11.5.22',
-        ev: this._state.newPostTxt,
-      };
-      this._state.eventsData.push(newPostEv);
-      this._callSubscriber(this._state);
-      this.getState().newPostTxt=''
+      this._addPotsEv()
     } else if (action.type === 'UPDATE-NEW-POST-TXT') {
-      this._state.newPostTxt = action.updateTxt;
-      this._callSubscriber(this._state);  
+      this._updateNewPostTxt(action.updateTxt)
     }
   },
 };
