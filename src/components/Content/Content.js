@@ -6,7 +6,7 @@ import { MyMsgs } from './MyMsgs/MyMsgs';
 import { Profile } from './Profile/Profile';
 
 export const Content = (props) => {
-  let eventsMap = props.store.getState().eventsData.map((e) => (
+  let eventsMap = props.store.getState().eventsData.eventsList.map((e) => (
     <Route path={'/Events/' + e.id} element={<Events ev={e.ev} />} />
   ));
   let myMsgs = (

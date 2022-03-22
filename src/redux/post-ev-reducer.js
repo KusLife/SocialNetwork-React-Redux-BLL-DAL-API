@@ -15,7 +15,7 @@ const postEvReducer = (state, action) => {
         data: '11.5.22',
         ev: state.newPostTxt,
       };
-      state.eventsData.push(newPostEvItem);
+      state.eventsList.push(newPostEvItem);
       state.newPostTxt = '';
       return state
     case UPDATE_NEW_POST_TXT:

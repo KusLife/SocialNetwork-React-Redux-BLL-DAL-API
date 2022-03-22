@@ -27,7 +27,7 @@ export const Profile = (props) => {
         <textarea
           onChange={onChangePost}
           ref={newPost}
-          value={props.store.getState().newPostTxt}
+          value={props.store.getState().eventsData.newPostTxt}
         />
         <button onClick={addPost}>Add events</button>
       </div>

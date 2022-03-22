@@ -14,7 +14,7 @@ const messageReducer = (state, action) => {
         time: '15:53',
         text: state.newMsgTxt,
       };
-      state.msgsData.push(newMsgItem);
+      state.msgsList.push(newMsgItem);
       state.newMsgTxt = '';
       return state;
     case UPDATE_NEW_MSG_TXT:

@@ -10,7 +10,7 @@ import {
 export const MyMsgs = (props) => {
   let MsgElements = props.store
     .getState()
-    .msgsData.map((it) => <Msgs id={it.id} text={it.text} time={it.time} />);
+    .msgsData.msgsList.map((it) => <Msgs id={it.id} text={it.text} time={it.time} />);
 
   let newMsg = React.createRef();
   let addMsg = () => {
@@ -30,7 +30,7 @@ export const MyMsgs = (props) => {
       <textarea
         onChange={onChangeMsg}
         ref={newMsg}
-        value={props.store.getState().newMsgTxt}
+        value={props.store.getState().msgsData.newMsgTxt}
       />
       <button onClick={addMsg}>Post</button>
     </div>
