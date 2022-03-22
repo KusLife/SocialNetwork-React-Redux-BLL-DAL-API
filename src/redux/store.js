@@ -1,5 +1,10 @@
+
+  import postEvReducer from "./post-ev-reducer";
+  import messageReducer from "./messege-reducer";
+  
 let store = {
   _state: {
+    newPostTxt: 'Gime all ur LOVE!',
     eventsData: [
       { key: '', id: 1, data: '2.21.22', ev: 'Meating with Teammembers' },
       { key: '', id: 2, data: '8.3.22', ev: "Women's day" },
@@ -7,8 +12,8 @@ let store = {
       { key: '', id: 4, data: '4.4.22', ev: 'Glamoure show' },
       { key: '', id: 5, data: '3.5.22', ev: 'Queen and King' },
     ],
-    newPostTxt: 'Gime all ur LOVE!',
-    textMsg: [
+   
+    msgsData: [
       { id: 1, time: '10:19', text: 'Hey' },
       { id: 2, time: '10:20', text: 'Are u fine? Where you have been?' },
       {
@@ -28,30 +33,13 @@ let store = {
   subscriber(observer) {
     this._callSubscriber = observer;
   },
-
-  _addPotsEv() {
-    let newPostEv = {
-      key: '',
-      id: 6,
-      data: '11.5.22',
-      ev: this._state.newPostTxt,
-    };
-    this._state.eventsData.push(newPostEv);
-    this._callSubscriber(this._state);
-    this.getState().newPostTxt=''
-  },
-  _updateNewPostTxt(updateTxt) {
-    this._state.newPostTxt = updateTxt;
-    this._callSubscriber(this._state);
-  },
-  
-
   dispatch(action) {
-    if (action.type === 'ADD-POST-EV') {
-      this._addPotsEv()
-    } else if (action.type === 'UPDATE-NEW-POST-TXT') {
-      this._updateNewPostTxt(action.updateTxt)
-    }
+
+    this._state = postEvReducer(this._state, action)
+    this._state = messageReducer(this._state, action)
+
+    this._callSubscriber()
+
   },
 };
 

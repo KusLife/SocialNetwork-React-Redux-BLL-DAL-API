@@ -1,15 +1,17 @@
 import React from 'react';
 import s from './Profile.module.css';
 import Spitz from '../../../pic/Spitz.jpg';
+import {addPotsEvActionCreater, updateNewPostTxtActionCreater} from '../../../redux/post-ev-reducer'
+
 
 export const Profile = (props) => {
   let newPost = React.createRef();
   let addPost = () => {
-    props.store.dispatch({ type: 'ADD-POST-EV' });
+    props.store.dispatch(addPotsEvActionCreater());
   };
   let onChangePost = () => {
     let text = newPost.current.value;
-    props.store.dispatch({ type: 'UPDATE-NEW-POST-TXT', updateTxt: text });
+    props.store.dispatch(updateNewPostTxtActionCreater(text));
   };
   return (
     <div>
@@ -27,10 +29,11 @@ export const Profile = (props) => {
           ref={newPost}
           value={props.store.getState().newPostTxt}
         />
-        <button onClick={addPost}>Post</button>
+        <button onClick={addPost}>Add events</button>
       </div>
     </div>
   );
 };
+
 
 // "https://spitz-sobaka.ru/wp-content/uploads/2018/09/2-babydoll-deystvitelno-napominaet-kukolku.jpeg"
