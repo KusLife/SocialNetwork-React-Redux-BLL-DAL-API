@@ -3,24 +3,32 @@ import {
   addMessageActionCreater,
   updateMessageActionCreater,
 } from '../../../redux/messege-reducer';
+import StoreContext from '../../../storeContext';
 import { MyMsgs } from './MyMsgs';
 
-const MyMsgsContainer = (props) => {
-  let addMsgTxt = () => {
-    props.store.dispatch(addMessageActionCreater());
-  };
-  let onChangeMsgTxt = (text) => {
-    props.store.dispatch(updateMessageActionCreater(text));
-  };
-  let state = props.store.getState()
+const MyMsgsContainer = () => {
   return (
     <div>
-     
-     < MyMsgs addMsgTxt={addMsgTxt} state={state} onChangeMsgTxt={onChangeMsgTxt} />
-
-    
+      <StoreContext.Consumer>
+        {(store) => {
+          let addMsgTxt = () => {
+            store.dispatch(addMessageActionCreater());
+          };
+          let onChangeMsgTxt = (text) => {
+            store.dispatch(updateMessageActionCreater(text));
+          };
+          let state = store.getState();
+          return (
+            <MyMsgs
+              addMsgTxt={addMsgTxt}
+              state={state}
+              onChangeMsgTxt={onChangeMsgTxt}
+            />
+          );
+        }}
+      </StoreContext.Consumer>
     </div>
   );
 };
 
-export default MyMsgsContainer
+export default MyMsgsContainer;

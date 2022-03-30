@@ -5,12 +5,15 @@ import './index.css';
 import App from './App';
 import store from './redux/redux-store';
 import { BrowserRouter } from 'react-router-dom';
+import StoreContex from './storeContext';
 
-let rerenderWholeTree = (state) => {
+let rerenderWholeTree = () => {
   ReactDOM.render(
     <React.StrictMode>
       <BrowserRouter>
-        <App store={store} state={state} />
+        <StoreContex.Provider value={store}>
+          <App />
+        </StoreContex.Provider>
       </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')

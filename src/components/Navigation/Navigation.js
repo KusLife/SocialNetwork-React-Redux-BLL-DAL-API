@@ -3,7 +3,7 @@ import { Link, Routes, Route } from 'react-router-dom';
 import s from './Navigation.module.css';
 import { EventsList } from './EventsNav/EventsList';
 
-export const Navigation = (props) => {
+export const Navigation = () => {
   let searchItem = React.createRef();
 
   let searchBar = () => {
@@ -44,7 +44,7 @@ export const Navigation = (props) => {
           <Route
             path="/EventsList"
             element={
-              <EventsList eventsList={props.state.eventsData.eventsList} />
+              <EventsList  />
             }
           />
         </Routes>

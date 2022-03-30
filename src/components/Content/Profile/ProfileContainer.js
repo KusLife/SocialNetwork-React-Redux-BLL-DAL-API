@@ -3,26 +3,30 @@ import {
   addPotsEventActionCreater,
   updateTextActionCreater,
 } from '../../../redux/post-ev-reducer';
+import StoreContext from '../../../storeContext';
 import { Profile } from './Profile';
 
-const ProfileContainer = (props) => {
-  let addPost = () => {
-    props.store.dispatch(addPotsEventActionCreater());
-  };
-
-  let onChangeText = (text) => {
-    props.store.dispatch(updateTextActionCreater(text));
-  };
-
-  let newPost = props.store.getState().eventsData.newPostTxt;
-
+const ProfileContainer = () => {
   return (
     <div>
-      <Profile
-        addPost={addPost}
-        onChangeText={onChangeText}
-        newPostTxt={newPost}
-      />
+      <StoreContext.Consumer>
+        {(store) => {
+          let addPost = () => {
+            store.dispatch(addPotsEventActionCreater());
+          };
+          let onChangeText = (text) => {
+            store.dispatch(updateTextActionCreater(text));
+          };
+          let newPost = store.getState().eventsData.newPostTxt;
+          return (
+            <Profile
+              addPost={addPost}
+              onChangeText={onChangeText}
+              newPostTxt={newPost}
+            />
+          );
+        }}
+      </StoreContext.Consumer>
     </div>
   );
 };

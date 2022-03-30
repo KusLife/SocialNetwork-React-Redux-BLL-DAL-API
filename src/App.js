@@ -4,16 +4,16 @@ import { Header } from './components/Header/Header';
 import { Navigation } from './components/Navigation/Navigation';
 import { Content } from './components/Content/Content';
 import { Footer } from './components/Footer/Footer';
-// import {updateNewPostTxt} from './state'
 
-function App(props) {
+
+function App() {
   return (
     <div className="App">
       <Header />
 
-      <Navigation store={props.store} state={props.state} />
+      <Navigation  />
 
-      <Content store={props.store} state={props.state}/>
+      <Content />
 
       <Footer />
     </div>
@@ -21,3 +21,8 @@ function App(props) {
 }
 
 export default App;
+
+
+{/* <Navigation store={props.store} state={props.state} /> */}
+
+{/* <Content store={props.store} state={props.state}/> */}
