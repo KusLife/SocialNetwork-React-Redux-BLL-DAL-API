@@ -1,4 +1,3 @@
-
   import postEvReducer from "./post-ev-reducer";
   import messageReducer from "./messege-reducer";
   
@@ -49,4 +48,4 @@ let store = {
 };
 
 window.store = store;
-export default store;
+// export default store;

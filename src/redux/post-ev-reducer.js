@@ -1,13 +1,24 @@
-export const addPotsEvActionCreater = () => ({ type: ADD_POST_EV });
-export const updateNewPostTxtActionCreater = (text) => ({
+const ADD_POST_EV = 'ADD_POST_EV';
+const UPDATE_NEW_POST_TXT = 'UPDATE_NEW_POST_TXT';
+export const addPotsEventActionCreater = () => ({ type: ADD_POST_EV });
+export const updateTextActionCreater = (text) => ({
   type: UPDATE_NEW_POST_TXT,
   updateTxt: text,
 });
-const ADD_POST_EV = 'ADD-POST-EV';
-const UPDATE_NEW_POST_TXT = 'UPDATE-NEW-POST-TXT';
 
-const postEvReducer = (state, action) => {
-  switch(action.type) {
+let initialState = {
+  newPostTxt: 'Gime all ur LOVE!',
+  eventsList: [
+    { key: '', id: 1, data: '2.21.22', ev: 'Meating with Teammembers' },
+    { key: '', id: 2, data: '8.3.22', ev: "Women's day" },
+    { key: '', id: 3, data: '15.3.22', ev: 'First fast for peace' },
+    { key: '', id: 4, data: '4.4.22', ev: 'Glamoure show' },
+    { key: '', id: 5, data: '3.5.22', ev: 'Queen and King' },
+  ],
+};
+
+const postEvReducer = (state = initialState, action) => {
+  switch (action.type) {
     case ADD_POST_EV:
       let newPostEvItem = {
         key: '',
@@ -17,14 +28,15 @@ const postEvReducer = (state, action) => {
       };
       state.eventsList.push(newPostEvItem);
       state.newPostTxt = '';
-      return state
+      return state;
     case UPDATE_NEW_POST_TXT:
       state.newPostTxt = action.updateTxt;
-      return state
+      return state;
     default:
-      return state
+      return state;
   }
-// SECOND VARIANT
+
+  // SECOND VARIANT
   // if (action.type === ADD_POST_EV) {
   //   let newPostEvItem = {
   //     key: '',

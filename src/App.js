@@ -11,9 +11,9 @@ function App(props) {
     <div className="App">
       <Header />
 
-      <Navigation store={props.store} />
+      <Navigation store={props.store} state={props.state} />
 
-      <Content store={props.store} />
+      <Content store={props.store} state={props.state}/>
 
       <Footer />
     </div>

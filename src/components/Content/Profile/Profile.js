@@ -1,17 +1,19 @@
 import React from 'react';
 import s from './Profile.module.css';
 import Spitz from '../../../pic/Spitz.jpg';
-import {addPotsEvActionCreater, updateNewPostTxtActionCreater} from '../../../redux/post-ev-reducer'
+// import {addPotsEventActionCreater,
+  // updateTextActionCreater} from '../../../redux/post-ev-reducer'
 
 
 export const Profile = (props) => {
-  let newPost = React.createRef();
+  let newEventPost = React.createRef();
+
   let addPost = () => {
-    props.store.dispatch(addPotsEvActionCreater());
+    props.addPost();
   };
   let onChangePost = () => {
-    let text = newPost.current.value;
-    props.store.dispatch(updateNewPostTxtActionCreater(text));
+    let text = newEventPost.current.value;
+    props.onChangeText(text);
   };
   return (
     <div>
@@ -26,8 +28,8 @@ export const Profile = (props) => {
         <div>Date new EVENT:)</div>
         <textarea
           onChange={onChangePost}
-          ref={newPost}
-          value={props.store.getState().eventsData.newPostTxt}
+          ref={newEventPost}
+          value={props.newPostTxt}
         />
         <button onClick={addPost}>Add events</button>
       </div>
