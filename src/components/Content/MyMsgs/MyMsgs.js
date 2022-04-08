@@ -2,11 +2,11 @@ import React from 'react';
 import { Msgs } from './Msgs/Msgs';
 import s from './MyMsgs.module.css';
 import { Respons } from '../Respons/Respons';
-import storeContext from '../../../storeContext'
+// import storeContext from '../../../storeContext'
 
 
 export const MyMsgs = (props) => {
-  let MsgElements = props.state.msgsData.msgsList.map((it) => (
+  let MsgElements = props.msgsList.map((it) => (
     <Msgs id={it.id} text={it.text} time={it.time} />
   ));
 
@@ -28,7 +28,7 @@ export const MyMsgs = (props) => {
       <textarea
         onChange={onChangeMsg}
         ref={newMsg}
-        value={props.state.msgsData.newMsgTxt}
+        value={props.newMsgTxt}
       />
       <button onClick={addMsg}>Post</button>
     </div>

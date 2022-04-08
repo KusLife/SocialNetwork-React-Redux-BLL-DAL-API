@@ -1,34 +1,27 @@
-import React from 'react';
+import { connect } from 'react-redux';
 import {
   addPotsEventActionCreater,
   updateTextActionCreater,
 } from '../../../redux/post-ev-reducer';
-import StoreContext from '../../../storeContext';
 import { Profile } from './Profile';
 
-const ProfileContainer = () => {
-  return (
-    <div>
-      <StoreContext.Consumer>
-        {(store) => {
-          let addPost = () => {
-            store.dispatch(addPotsEventActionCreater());
-          };
-          let onChangeText = (text) => {
-            store.dispatch(updateTextActionCreater(text));
-          };
-          let newPost = store.getState().eventsData.newPostTxt;
-          return (
-            <Profile
-              addPost={addPost}
-              onChangeText={onChangeText}
-              newPostTxt={newPost}
-            />
-          );
-        }}
-      </StoreContext.Consumer>
-    </div>
-  );
+const mapStateToProps = (state) => {
+  return {
+    newPostTxt: state.eventsData.newPostTxt,
+  };
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addPost: () => {
+      dispatch(addPotsEventActionCreater());
+    },
+    onChangeText: (text) => {
+      dispatch(updateTextActionCreater(text));
+    },
+  };
+};
+
+const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
 
 export default ProfileContainer;

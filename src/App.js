@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Header } from './components/Header/Header';
 import { Navigation } from './components/Navigation/Navigation';
-import { Content } from './components/Content/Content';
+import  ContentContainer  from './components/Content/ContentContainer';
 import { Footer } from './components/Footer/Footer';
 
 
@@ -13,7 +13,7 @@ function App() {
 
       <Navigation  />
 
-      <Content />
+      <ContentContainer />
 
       <Footer />
     </div>

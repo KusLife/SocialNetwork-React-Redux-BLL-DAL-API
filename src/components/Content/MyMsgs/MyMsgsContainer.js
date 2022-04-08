@@ -1,34 +1,28 @@
-import React from 'react';
 import {
   addMessageActionCreater,
   updateMessageActionCreater,
 } from '../../../redux/messege-reducer';
-import StoreContext from '../../../storeContext';
 import { MyMsgs } from './MyMsgs';
+import { connect } from 'react-redux';
 
-const MyMsgsContainer = () => {
-  return (
-    <div>
-      <StoreContext.Consumer>
-        {(store) => {
-          let addMsgTxt = () => {
-            store.dispatch(addMessageActionCreater());
-          };
-          let onChangeMsgTxt = (text) => {
-            store.dispatch(updateMessageActionCreater(text));
-          };
-          let state = store.getState();
-          return (
-            <MyMsgs
-              addMsgTxt={addMsgTxt}
-              state={state}
-              onChangeMsgTxt={onChangeMsgTxt}
-            />
-          );
-        }}
-      </StoreContext.Consumer>
-    </div>
-  );
+let mapStateToProps = (state) => {
+  return {
+    msgsList: state.msgsData.msgsList,
+    newMsgTxt: state.msgsData.newMsgTxt,
+  };
 };
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    addMsgTxt: () => {
+      dispatch(addMessageActionCreater());
+    },
+    onChangeMsgTxt: (text) => {
+      dispatch(updateMessageActionCreater(text));
+    },
+  };
+};
+
+const MyMsgsContainer = connect(mapStateToProps, mapDispatchToProps)(MyMsgs);
 
 export default MyMsgsContainer;

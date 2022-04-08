@@ -1,9 +1,6 @@
 import React from 'react';
 import s from './Profile.module.css';
 import Spitz from '../../../pic/Spitz.jpg';
-// import {addPotsEventActionCreater,
-  // updateTextActionCreater} from '../../../redux/post-ev-reducer'
-
 
 export const Profile = (props) => {
   let newEventPost = React.createRef();
@@ -36,6 +33,5 @@ export const Profile = (props) => {
     </div>
   );
 };
-
 
 // "https://spitz-sobaka.ru/wp-content/uploads/2018/09/2-babydoll-deystvitelno-napominaet-kukolku.jpeg"

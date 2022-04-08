@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 import s from './Navigation.module.css';
-import { EventsList } from './EventsNav/EventsList';
+import EventsListContainer from './EventsNav/EventsListContainer';
 
 export const Navigation = () => {
   let searchItem = React.createRef();
@@ -41,12 +41,7 @@ export const Navigation = () => {
         </div>
 
         <Routes>
-          <Route
-            path="/EventsList"
-            element={
-              <EventsList  />
-            }
-          />
+          <Route path="/EventsList" element={<EventsListContainer />} />
         </Routes>
       </div>
     </>
