@@ -19,19 +19,24 @@ let initialState = {
 
 const postEvReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST_EV:
+    case ADD_POST_EV: {
       let newPostEvItem = {
         key: '',
         id: 6,
         data: '11.5.22',
         ev: state.newPostTxt,
       };
-      state.eventsList.push(newPostEvItem);
-      state.newPostTxt = '';
-      return state;
-    case UPDATE_NEW_POST_TXT:
-      state.newPostTxt = action.updateTxt;
-      return state;
+      let stateCopy = {...state}
+      stateCopy.eventsList = [...state.eventsList]
+      stateCopy.eventsList.push(newPostEvItem);
+      stateCopy.newPostTxt = '';
+      return stateCopy;
+    }
+    case UPDATE_NEW_POST_TXT: {
+      let stateCopy = {...state}
+      stateCopy.newPostTxt = action.updateTxt;
+      return stateCopy;
+    }
     default:
       return state;
   }
