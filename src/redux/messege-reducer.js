@@ -17,40 +17,21 @@ let initialState = {
 
 const messageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_MSG: {
+    case ADD_MSG:
       let newMsgItem = {
         id: 6,
         time: '15:53',
         text: state.newMsgTxt,
       };
-      let stateCopy = {...state}
-      stateCopy.msgsList = [...state.msgsList]
-      stateCopy.msgsList.push(newMsgItem);
-      stateCopy.newMsgTxt = '';
-      return stateCopy;
-    }
-    case UPDATE_NEW_MSG_TXT: {
-      let stateCopy = {...state}
-      stateCopy.newMsgTxt = action.updateMsgTxt;
-      return stateCopy;
-    }
+      return {
+        msgsList: [...state.msgsList, newMsgItem],
+        newMsgTxt: '',
+      };
+    case UPDATE_NEW_MSG_TXT:
+      return { ...state, newMsgTxt: action.updateMsgTxt };
     default:
       return state;
   }
-
-  // SECOND METHOD
-  // if (action.type === ADD_MSG) {
-  //   let newMsgItem = {
-  //     id: 6,
-  //     time: '15:53',
-  //     text: state.newMsgTxt,
-  //   };
-  //   state.msgsData.push(newMsgItem);
-  //   state.newMsgTxt = '';
-  // } else if (action.type === UPDATE_NEW_MSG_TXT) {
-  //   state.newMsgTxt = action.updateMsgTxt;
-  // }
-  // return state
 };
 
 export const addMessageActionCreater = () => ({ type: ADD_MSG });

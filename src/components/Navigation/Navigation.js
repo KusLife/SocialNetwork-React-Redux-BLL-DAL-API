@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 import s from './Navigation.module.css';
 import EventsListContainer from './EventsNav/EventsListContainer';
+import ProfileContainer from '../Content/Profile/ProfileContainer';
 
 export const Navigation = () => {
   let searchItem = React.createRef();
@@ -14,17 +15,12 @@ export const Navigation = () => {
   return (
     <>
       <div className={s.Navigation}>
-        <div>
-          {/* Later on I'd like to make this txt removeble in search txtarea*/}
-          <textarea ref={searchItem} cols="30" rows="2">
-            Type here
-          </textarea>
-          <button onClick={searchBar}>Search</button>
+        <div className={s.ProfCont}>
+          <ProfileContainer />
         </div>
-
         <div>
-          <Link to="/News" className={(s.item, s.active)}>
-            News
+          <Link to="Friends" className={(s.item, s.active)}>
+            Friends
           </Link>
         </div>
         <div className={s.item}>
@@ -43,6 +39,15 @@ export const Navigation = () => {
         <Routes>
           <Route path="/EventsList" element={<EventsListContainer />} />
         </Routes>
+
+        <div>
+          {/* Later on I'd like to make this txt removeble in search txtarea
+          And I wanna to hide this part as a slider  */}
+          <textarea ref={searchItem} cols="30" rows="2">
+            Type here
+          </textarea>
+          <button onClick={searchBar}>Search</button>
+        </div>
       </div>
     </>
   );

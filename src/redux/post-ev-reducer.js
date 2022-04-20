@@ -1,5 +1,6 @@
 const ADD_POST_EV = 'ADD_POST_EV';
 const UPDATE_NEW_POST_TXT = 'UPDATE_NEW_POST_TXT';
+
 export const addPotsEventActionCreater = () => ({ type: ADD_POST_EV });
 export const updateTextActionCreater = (text) => ({
   type: UPDATE_NEW_POST_TXT,
@@ -19,42 +20,23 @@ let initialState = {
 
 const postEvReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST_EV: {
+    case ADD_POST_EV:
       let newPostEvItem = {
         key: '',
         id: 6,
         data: '11.5.22',
         ev: state.newPostTxt,
       };
-      let stateCopy = {...state}
-      stateCopy.eventsList = [...state.eventsList]
-      stateCopy.eventsList.push(newPostEvItem);
-      stateCopy.newPostTxt = '';
-      return stateCopy;
-    }
+      return {
+        eventsList: [...state.eventsList, newPostEvItem],
+        newPostTxt: '',
+      };
     case UPDATE_NEW_POST_TXT: {
-      let stateCopy = {...state}
-      stateCopy.newPostTxt = action.updateTxt;
-      return stateCopy;
+      return { ...state, newPostTxt: action.updateTxt };
     }
     default:
       return state;
   }
-
-  // SECOND VARIANT
-  // if (action.type === ADD_POST_EV) {
-  //   let newPostEvItem = {
-  //     key: '',
-  //     id: 6,
-  //     data: '11.5.22',
-  //     ev: state.newPostTxt,
-  //   };
-  //   state.eventsData.push(newPostEvItem);
-  //   state.newPostTxt = '';
-  // } else if (action.type === UPDATE_NEW_POST_TXT) {
-  //   state.newPostTxt = action.updateTxt;
-  // }
-  // return state;
 };
 
 export default postEvReducer;

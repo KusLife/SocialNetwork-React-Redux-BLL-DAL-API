@@ -1,3 +1,7 @@
+.ProfCont {
+  padding-bottom: 20px;
+} 
+
 .Navigation {
   grid-area: n;
   background: url('../../pic/palms.jpg');
@@ -7,6 +11,7 @@
   font-size: 20px;
   min-width: 250px;
 }
+
 
 .item {
   font-size: 30px;
@@ -21,16 +26,13 @@
 .item a {
   text-decoration: none;
   color: brown;
-  
 }
 
-.item a.active  {
+.item a.active {
   text-decoration: none;
   color: rgb(41, 180, 138);
-  
 }
 
 .item a:focus {
   color: rgb(10, 175, 24);
 }
-
