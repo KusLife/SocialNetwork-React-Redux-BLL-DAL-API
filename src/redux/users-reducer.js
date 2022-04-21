@@ -1,46 +1,16 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const TOTAL_USERS_COUNT = 'TOTAL_USERS_COUNT';
+
 
 let initialState = {
-  users:[ ]
-}
-// let initialState = {
-//   users: [
-//     {
-//       id: 1,
-//       followed: false,
-//       avatar: <img src="" alt="" />,
-//       name: 'Evhen',
-//       status: '3D Modeling',
-//       location: { country: 'Ukraine', city: 'Kiev' },
-//     },
-//     {
-//       id: 2,
-//       followed: true,
-//       avatar: <img src="" alt="" />,
-//       name: 'Denis',
-//       status: 'UI Desiner',
-//       location: { country: 'Ukraine', city: 'Kharkiv' },
-//     },
-//     {
-//       id: 3,
-//       followed: false,
-//       avatar: <img src="" alt="" />,
-//       name: 'Pavel',
-//       status: 'IT-school Teatcher',
-//       location: { country: 'Ukraine', city: 'Odessa' },
-//     },
-//     {
-//       id: 4,
-//       followed: false,
-//       avatar: <img src="" alt="" />,
-//       name: 'Nikita',
-//       status: 'AI Engenear',
-//       location: { country: 'Ukraine', city: 'Kiev' },
-//     },
-//   ],
-// };
+  users: [],
+  pageSize: 5,
+  totalUsersCount: 0,
+  currentPage: 1,
+};
 
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -65,7 +35,13 @@ const usersReducer = (state = initialState, action) => {
         }),
       };
     case SET_USERS: {
-      return { ...state, users: [...state.users, ...action.users] };
+      return { ...state, users: action.users };
+    }
+    case SET_CURRENT_PAGE: {
+      return { ...state, currentPage: action.currentPage };
+    }
+    case TOTAL_USERS_COUNT: {
+      return { ...state, totalUsersCount: action.count };
     }
     default:
       return state;
@@ -73,9 +49,13 @@ const usersReducer = (state = initialState, action) => {
 };
 
 
-
 export const followAC = (userId) => ({ type: FOLLOW, userId });
 export const unfollowAC = (userId) => ({ type: UNFOLLOW, userId });
 export const setUsersAC = (users) => ({ type: SET_USERS, users });
+export const setCurrentPageAC = (currentPage) => ({
+  type: SET_CURRENT_PAGE,
+  currentPage
+});
+export const setTotalUsersCountAC = (totalUsersCount) => ({type: TOTAL_USERS_COUNT, count: totalUsersCount });
 
 export default usersReducer;

@@ -22,3 +22,11 @@
   font-size: large;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
+
+.selectedPage {
+  font-weight: bold;
+}
+
+.pagesNumber {
+  color: bisque;
+}

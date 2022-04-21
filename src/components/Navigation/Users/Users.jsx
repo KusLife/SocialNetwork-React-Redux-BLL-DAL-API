@@ -1,100 +1,100 @@
 import axios from 'axios';
 import React from 'react';
-import ketty from '../../../pic/ketty.jpg'
+import ketty from '../../../pic/ketty.jpg';
 import s from './Users.module.css';
 
-let Users = (props) => {
-
-  let getUsers = () => {
-  if (props.users.length === 0) {
+class Users extends React.Component {
+  componentDidMount() {
     axios
-      .get('https://social-network.samuraijs.com/api/1.0/users')
-      .then((response) => { 
-        props.setUsers(response.data.items);
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+      )
+      .then((response) => {
+        this.props.setUsers(response.data.items);
+        this.props.setUsersTotalCount(response.data.totalCount);
       });
+  }
+
+  onPageChange = (pagesNumber) => {
+    this.props.setCurrentPage(pagesNumber);
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${pagesNumber}&count=${this.props.pageSize}`
+      )
+      .then((response) => {
+        this.props.setUsers(response.data.items);
+      });
+  };
+
+  render() {
+    let pagesCount = Math.ceil(
+      this.props.totalUsersCount / this.props.pageSize
+    );
+
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+      pages.push(i);
+    }
+
+    return (
+      <div>
+        <div className={s.pagesNumber}>
+          {pages.map((p) => {
+            return (
+              <span
+                className={this.props.currentPage === p && s.selectedPage}
+                onClick={() => {
+                  this.onPageChange(p);
+                }}
+              >
+                {p}
+              </span>
+            );
+          })}
+        </div>
+
+        {this.props.users.map((u) => (
+          <div key={u.id} className={s.Users}>
+            <span>
+              <div className={s.AvaInf}>
+                <img src={u.photos.small != null ? u.photos.setUsers : ketty} />
+              </div>
+            </span>
+
+            <span>
+              <div>{u.name}</div>
+              <div>{u.status}</div>
+            </span>
+            <span>
+              {/* <div>{'u.location.country'}</div>
+            <div>{'u.location.city'}</div> */}
+            </span>
+            <span>
+              <div>
+                {u.followed ? (
+                  <button
+                    onClick={() => {
+                      this.props.follow(u.id);
+                    }}
+                  >
+                    Unfollow
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      this.props.unfollow(u.id);
+                    }}
+                  >
+                    Follow
+                  </button>
+                )}
+              </div>
+            </span>
+          </div>
+        ))}
+      </div>
+    );
   }
 }
 
-  return (
-    <div>
-<button onClick={getUsers} >getUsers</button>
-
-      {props.users.map((u) => (
-        <div key={u.id} className={s.Users}>
-          <span>
-            <div className={s.AvaInf}>
-              <img src={u.photos.small != null ? u.photos.setUsers: ketty} />
-            </div>
-          </span>
-      
-          <span>
-            <div>{u.name}</div>
-            <div>{u.status}</div>
-          </span>
-          <span>
-            {/* <div>{'u.location.country'}</div>
-            <div>{'u.location.city'}</div> */}
-          </span>
-          <span>
-            <div>
-              {u.followed ? (
-                <button
-                  onClick={() => {
-                    props.follow(u.id);
-                  }}
-                >
-                  Unfollow
-                </button>
-              ) : (
-                <button
-                  onClick={() => {
-                    props.unfollow(u.id);
-                  }}
-                >
-                  Follow
-                </button>
-              )}
-            </div>
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-};
-
 export default Users;
-
-// [
-//   {
-//     id: 1,
-//     followed: false,
-//     avatar: <img src={ketty}/>,
-//     name: 'Evhen',
-//     status: '3D Modeling',
-//     location: { country: 'Ukraine', city: 'Kiev' },
-//   },
-//   {
-//     id: 2,
-//     followed: true,
-//     avatar: <img src={ketty}/>,
-//     name: 'Denis',
-//     status: 'UI Desiner',
-//     location: { country: 'Ukraine', city: 'Kharkiv' },
-//   },
-//   {
-//     id: 3,
-//     followed: false,
-//     avatar: <img src={ketty}/>,
-//     name: 'Pavel',
-//     status: 'IT-school Teatcher',
-//     location: { country: 'Ukraine', city: 'Odessa' },
-//   },
-//   {
-//     id: 4,
-//     followed: false,
-//     avatar: <img src={ketty}/>,
-//     name: 'Nikita',
-//     status: 'AI Engenear',
-//     location: { country: 'Ukraine', city: 'Kiev' },
-//   },
-// ]
