@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 const Events = (props) => {
   let eventsMaping = props.eventsList.map((e) => (
     <Routes>
-      <Route path={'/Events/' + e.id} element={<EventsText ev={e.ev} />} />
+      <Route path={'/events/' + e.id} element={<EventsText ev={e.ev} />} />
     </Routes>
   ));
   return <div>{eventsMaping}</div>;

@@ -1,27 +1,53 @@
+import React from 'react';
+import {  useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
-  addPotsEventActionCreater,
-  updateTextActionCreater,
+  onChangeTextAC,
+  addPostAC,
+  setUserProfile,
 } from '../../../redux/post-ev-reducer';
-import { Profile } from './Profile';
+import Profile from './Profile';
+import axios from 'axios';
+
+class ProfileContainer extends React.Component {
+  componentDidMount() {
+    let userId = this.props.router.params.userId
+    axios
+      .get(`https://social-network.samuraijs.com/api/1.0/profile/`+ userId)
+      .then((response) => {
+        this.props.setUserProfile(response.data);
+      });
+  }
+  render() {
+    return <Profile {...this.props} />;
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
     newPostTxt: state.eventsData.newPostTxt,
+    profile: state.eventsData.profile,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addPost: () => {
-      dispatch(addPotsEventActionCreater());
-    },
-    onChangeText: (text) => {
-      dispatch(updateTextActionCreater(text));
-    },
-  };
-};
 
-const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
+// wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
+function withRouter(Component) {
+    function ComponentWithRouterProp(props) {
+        let params = useParams();
+        return (
+            <Component
+                {...props}
+                router={{ params }}
+            />
+        );
+    }
 
-export default ProfileContainer;
+    return ComponentWithRouterProp;
+}
+
+export default connect(mapStateToProps, {
+  onChangeTextAC,
+  addPostAC,
+  setUserProfile,
+})(withRouter(ProfileContainer));

@@ -7,6 +7,6 @@ let mapStateToProps = (state) => {
   };
 };
 
-let EventsListContainer = connect(mapStateToProps)(EventsList);
+const EventsListContainer = connect(mapStateToProps)(EventsList);
 
 export default EventsListContainer;

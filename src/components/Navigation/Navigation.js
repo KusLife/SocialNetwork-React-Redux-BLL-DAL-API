@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 import s from './Navigation.module.css';
 import EventsListContainer from './EventsNav/EventsListContainer';
-import ProfileContainer from '../Content/Profile/ProfileContainer';
+import AuthDataContainer from './Users/UserData/AuthDataContainer';
 
 export const Navigation = () => {
   let searchItem = React.createRef();
@@ -15,32 +15,8 @@ export const Navigation = () => {
   return (
     <>
       <div className={s.Navigation}>
-        <div className={s.ProfCont}>
-          <ProfileContainer />
-        </div>
-        <div>
-          <Link to="Friends" className={(s.item, s.active)}>
-            Friends
-          </Link>
-        </div>
-        <div className={s.item}>
-          <Link to="/MyMsgs">Messages</Link>
-        </div>
-        <div className={s.item}>
-          <Link to="/EventsList">Events</Link>
-        </div>
-        <div className={s.item}>
-          <Link to="/Help">Help</Link>
-        </div>
-        <div className={s.item}>
-          <Link to="/About">About us</Link>
-        </div>
 
-        <Routes>
-          <Route path="/EventsList" element={<EventsListContainer />} />
-        </Routes>
-
-        <div>
+      <div>
           {/* Later on I'd like to make this txt removeble in search txtarea
           And I wanna to hide this part as a slider  */}
           <textarea ref={searchItem} cols="30" rows="2">
@@ -48,6 +24,37 @@ export const Navigation = () => {
           </textarea>
           <button onClick={searchBar}>Search</button>
         </div>
+
+        <div className={(s.item, s.active)}>
+          <Link to="/profile/*" >Profile</Link>
+        </div>
+        <div className={s.item}>
+          <Link to="/users" >
+            Users
+          </Link>
+        </div>
+        <div className={s.item}>
+          <Link to="/myMsgs">Messages</Link>
+        </div>
+        <div className={s.item}>
+          <Link to="/eventsList">Events</Link>
+        </div>
+        <div className={s.item}>
+          <Link to="/help">Help</Link>
+        </div>
+        <div className={s.item}>
+          <Link to="/about">About us</Link>
+        </div>
+        <div className={(s.item, s.login)}>
+         <AuthDataContainer />
+        </div>
+
+
+        <Routes>
+          <Route path="/eventsList" element={<EventsListContainer />} />
+        </Routes>
+
+        
       </div>
     </>
   );

@@ -1,11 +1,6 @@
 const ADD_POST_EV = 'ADD_POST_EV';
 const UPDATE_NEW_POST_TXT = 'UPDATE_NEW_POST_TXT';
-
-export const addPotsEventActionCreater = () => ({ type: ADD_POST_EV });
-export const updateTextActionCreater = (text) => ({
-  type: UPDATE_NEW_POST_TXT,
-  updateTxt: text,
-});
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 let initialState = {
   newPostTxt: 'Gime all ur LOVE!',
@@ -16,6 +11,7 @@ let initialState = {
     { key: '', id: 4, data: '4.4.22', ev: 'Glamoure show' },
     { key: '', id: 5, data: '3.5.22', ev: 'Queen and King' },
   ],
+  profile: null,
 };
 
 const postEvReducer = (state = initialState, action) => {
@@ -34,9 +30,22 @@ const postEvReducer = (state = initialState, action) => {
     case UPDATE_NEW_POST_TXT: {
       return { ...state, newPostTxt: action.updateTxt };
     }
+    case SET_USER_PROFILE: {
+      return { ...state, profile: action.profile };
+    }
     default:
       return state;
   }
 };
+
+export const addPostAC = () => ({ type: ADD_POST_EV });
+export const onChangeTextAC = (text) => ({
+  type: UPDATE_NEW_POST_TXT,
+  updateTxt: text,
+});
+export const setUserProfile = (profile) => ({
+  type: SET_USER_PROFILE,
+  profile,
+});
 
 export default postEvReducer;
