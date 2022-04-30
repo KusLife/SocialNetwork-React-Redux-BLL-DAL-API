@@ -1,7 +1,7 @@
 import React from 'react';
 import { RMsgs } from './RMsgs/RMsgs';
 import s from './Respons.module.css';
-import cat1 from '../../../pic/cat1.jpg'
+import cat1 from '../../../../../pic/cat1.jpg'
 
 
 export const Respons = () => {

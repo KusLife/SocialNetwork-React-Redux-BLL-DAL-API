@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-let UserData = (props) => {
+let AuthUserData = (props) => {
   return (
     <div>
       <div>
@@ -12,4 +12,4 @@ let UserData = (props) => {
   );
 };
 
-export default UserData;
+export default AuthUserData;

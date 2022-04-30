@@ -9,13 +9,12 @@
   min-width: 250px;
 }
 
-
-
 .item {
   font-size: 30px;
 }
 
-.active , a{
+.active,
+a {
   text-decoration: none;
   font-size: 40px;
   color: rgb(212, 90, 151);
@@ -39,8 +38,7 @@
   color: rgb(122, 239, 131);
 }
 
-
-.login a{
+.login a {
   color: rgb(59, 145, 103);
 }
 

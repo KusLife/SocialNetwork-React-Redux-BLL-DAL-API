@@ -1,5 +1,5 @@
 import React from 'react';
-import {  useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   onChangeTextAC,
@@ -11,9 +11,9 @@ import axios from 'axios';
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    let userId = this.props.router.params.userId
+    let userId = this.props.router.params.userId;
     axios
-      .get(`https://social-network.samuraijs.com/api/1.0/profile/`+ userId)
+      .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
       .then((response) => {
         this.props.setUserProfile(response.data);
       });
@@ -30,20 +30,16 @@ const mapStateToProps = (state) => {
   };
 };
 
-
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
 function withRouter(Component) {
-    function ComponentWithRouterProp(props) {
-        let params = useParams();
-        return (
-            <Component
-                {...props}
-                router={{ params }}
-            />
-        );
-    }
+  function ComponentWithRouterProp(props) {
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+    return <Component {...props} router={{ location, navigate, params }} />;
+  }
 
-    return ComponentWithRouterProp;
+  return ComponentWithRouterProp;
 }
 
 export default connect(mapStateToProps, {

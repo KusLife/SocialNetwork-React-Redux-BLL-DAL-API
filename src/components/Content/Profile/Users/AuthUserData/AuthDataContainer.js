@@ -1,8 +1,8 @@
 import React from 'react';
-import UserData from './UserData';
+import AuthUserData from './AuthUserData';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { authUserDataAC } from '../../../../redux/auth-reducer';
+import { authUserDataAC } from '../../../../../redux/auth-reducer';
 
 class AuthDataContainer extends React.Component {
   componentDidMount() {
@@ -12,7 +12,6 @@ class AuthDataContainer extends React.Component {
       })
       .then((response) => {
         if (response.data.resultCode === 0) {
-          debugger;
           let { id, email, login } = response.data.data;
           this.props.authUserDataAC(id, email, login);
         }
@@ -20,7 +19,7 @@ class AuthDataContainer extends React.Component {
   }
 
   render() {
-    return <UserData {...this.props} />;
+    return <AuthUserData {...this.props} />;
   }
 }
 

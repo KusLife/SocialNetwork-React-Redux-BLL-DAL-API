@@ -1,7 +1,7 @@
 import React from 'react';
 import { Msgs } from './Msgs/Msgs';
 import s from './MyMsgs.module.css';
-import { Respons } from '../Respons/Respons';
+import { Respons } from './Msgs/Respons/Respons';
 // import storeContext from '../../../storeContext'
 
 

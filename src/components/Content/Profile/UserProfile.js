@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Profile.module.css';
 // import Spitz from '../../../pic/Spitz.jpg';
-import PreloaderGif from '../../../common/preloader/PreloaderGif'
+// import PreloaderGif from '../../../common/preloader/PreloaderGif'
 
 const UserProfile = (props) => {
  if (!props.profile) {
