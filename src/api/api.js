@@ -14,13 +14,19 @@ export const usersAPI = {
       .get(`users?page=${currentPage}&count=${pageSize}`)
       .then((respons) => respons.data);
   },
-
   getUsersFollow(id) {
     return instance.post(`follow/${id}`,{}).then((respons) => respons.data);
   },
   getUsersUnfollow(id) {
     return instance.delete(`follow/${id}`).then((respons) => respons.data);
   },
+  getProfile(id) {
+    return instance.get(`profile/${id}`).then((respons) => respons.data)
+  },
+  getMyAuthent() {
+    return instance.get(`auth/me`).then((respons) => respons.data)
+  }
+  
 };
 
 // axios

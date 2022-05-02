@@ -8,6 +8,7 @@ import {
   setCurrentPage,
   setTotalUsersCount,
   setIsFetching,
+  setButtonDisable
 } from '../../../../redux/users-reducer';
 import Users from './Users';
 import PreloaderGif from '../../../../common/preloader/PreloaderGif';
@@ -46,6 +47,8 @@ class UsersContainer extends React.Component {
           users={this.props.users}
           follow={this.props.follow}
           unfollow={this.props.unfollow}
+          setButtonDisable={this.props.setButtonDisable}
+          isButtonDisable={this.props.isButtonDisable}
         />
       </>
     );
@@ -59,6 +62,7 @@ const mapStateToProps = (state) => {
     totalUsersCount: state.usersData.totalUsersCount,
     currentPage: state.usersData.currentPage,
     isFetching: state.usersData.isFetching,
+    isButtonDisable: state.usersData.isButtonDisable
   };
 };
 
@@ -69,4 +73,5 @@ export default connect(mapStateToProps, {
   setCurrentPage,
   setTotalUsersCount,
   setIsFetching,
+  setButtonDisable,
 })(UsersContainer);
