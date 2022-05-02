@@ -7,15 +7,13 @@ import {
   setUserProfile,
 } from '../../../redux/post-ev-reducer';
 import Profile from './Profile';
-import axios from 'axios';
+import { usersAPI } from '../../../api/api';
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.router.params.userId;
-    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-      .then((response) => {
-        this.props.setUserProfile(response.data);
+    usersAPI.getProfile(userId).then((data) => {
+        this.props.setUserProfile(data);
       });
   }
   render() {
