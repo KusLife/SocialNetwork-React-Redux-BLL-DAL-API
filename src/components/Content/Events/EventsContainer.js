@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
-import  Events  from './Events';
-
+import Events from './Events';
 
 let mapStateToProps = (state) => {
   return {
-    eventsList: state.eventsData.eventsList
+    eventsList: state.eventsData.eventsList,
   };
 };
 

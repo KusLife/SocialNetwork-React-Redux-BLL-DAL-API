@@ -1,14 +1,16 @@
 import React from 'react';
 import s from './Events.module.css';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 const Events = (props) => {
   let eventsMaping = props.eventsList.map((e) => (
+    <div  key={e.id}>
     <Routes>
-      <Route path={'/events/' + e.id} element={<EventsText ev={e.ev} />} />
+      <Route path={'eventsList/events/' + e.id} element={<EventsText ev={e.ev}  key={e.id}/>} />
     </Routes>
+    </div>
   ));
-  return <div>{eventsMaping}</div>;
+  return <div >{eventsMaping}</div>;
 };
 
 let EventsText = (props) => {

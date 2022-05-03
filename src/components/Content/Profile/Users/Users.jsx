@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import ketty from '../../../../pic/ketty.jpg';
 import s from './Users.module.css';
 
@@ -10,6 +10,9 @@ let Users = (props) => {
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
+
+  if (!props.isAuth) return <Navigate  to='/login' />
+  
   return (
     <div>
       <div className={s.pagesNumber}>

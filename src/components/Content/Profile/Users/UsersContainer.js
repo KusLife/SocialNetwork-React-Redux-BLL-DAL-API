@@ -7,6 +7,7 @@ import {
 } from '../../../../redux/users-reducer';
 import Users from './Users';
 import PreloaderGif from '../../../../common/preloader/PreloaderGif';
+import withAuthRedirect from '../../../../hoc/withAuthRedirect';
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -35,6 +36,7 @@ class UsersContainer extends React.Component {
           
           setButtonDisable={this.props.setButtonDisable}
           isButtonDisable={this.props.isButtonDisable}
+
         />
       </>
     );
@@ -49,6 +51,7 @@ const mapStateToProps = (state) => {
     currentPage: state.usersData.currentPage,
     isFetching: state.usersData.isFetching,
     isButtonDisable: state.usersData.isButtonDisable,
+  
   };
 };
 
@@ -56,4 +59,4 @@ export default connect(mapStateToProps, {
   followThunk,
   unfollowThunk,
   getUsersThunkCreator,
-})(UsersContainer);
+})(withAuthRedirect(UsersContainer));

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   onChangeTextAC,
@@ -8,10 +7,14 @@ import {
   profileThunk,
 } from '../../../redux/post-ev-reducer';
 import Profile from './Profile';
+import withAuthRedirect from '../../../hoc/withAuthRedirect';
+import withRouter from '../../../hoc/withRouter';
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    this.props.profileThunk(this.props.router.params.userId)
+    let userId = this.props.router.params.userId
+    this.props.profileThunk(userId)
+    // if (!userId) {userId = 23641}
   }
   render() {
     return <Profile {...this.props} />;
@@ -19,25 +22,17 @@ class ProfileContainer extends React.Component {
 }
 const mapStateToProps = (state) => {
   return {
+    //this data is in the 'post-ev-reducer'
     newPostTxt: state.eventsData.newPostTxt,
     profile: state.eventsData.profile,
   };
 };
 
-// wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
-function withRouter(Component) {
-  function ComponentWithRouterProp(props) {
-    let location = useLocation();
-    let navigate = useNavigate();
-    let params = useParams();
-    return <Component {...props} router={{ location, navigate, params }} />;
-  }
-  return ComponentWithRouterProp;
-}
 
 export default connect(mapStateToProps, {
   onChangeTextAC,
   addPostAC,
   setUserProfile,
   profileThunk
-})(withRouter(ProfileContainer));
+})(withAuthRedirect(withRouter(ProfileContainer)));
+// 

@@ -2,6 +2,8 @@ import React from 'react';
 import s from './Profile.module.css';
 import Spitz from '../../../pic/Spitz.jpg';
 
+//myId = 23641}
+
 const MyProfile = (props) => {
   let newEventPost = React.createRef();
 

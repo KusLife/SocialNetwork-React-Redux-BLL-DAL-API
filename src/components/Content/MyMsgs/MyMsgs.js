@@ -2,8 +2,7 @@ import React from 'react';
 import { Msgs } from './Msgs/Msgs';
 import s from './MyMsgs.module.css';
 import { Respons } from './Msgs/Respons/Respons';
-// import storeContext from '../../../storeContext'
-
+import { Navigate } from 'react-router-dom';
 
 export const MyMsgs = (props) => {
   let MsgElements = props.msgsList.map((it) => (
@@ -18,6 +17,8 @@ export const MyMsgs = (props) => {
     let text = newMsg.current.value;
     props.onChangeMsgTxt(text);
   };
+
+  if (!props.isAuth) return <Navigate  to='/login' />
   return (
     <div className={s.Msgs}>
       {MsgElements}
