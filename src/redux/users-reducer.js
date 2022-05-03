@@ -122,20 +122,4 @@ export const followThunk = (id) => {
   };
 };
 
-
-
-
-
-// export const onPageChange = (pagesNumber, pageSize) => {
-//   return (dispatch) => {
-//     dispatch(setIsFetching(true));
-//     dispatch(setCurrentPage(pagesNumber));
-
-//     usersAPI.getUsers(pagesNumber, pageSize).then((data) => {
-//       dispatch(setUsers(data.items));
-//       dispatch(setIsFetching(false));
-//     });
-//   };
-// };
-
 export default usersReducer;

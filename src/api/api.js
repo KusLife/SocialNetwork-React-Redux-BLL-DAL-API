@@ -28,21 +28,4 @@ export const usersAPI = {
   getMyAuthent() {
     return instance.get(`auth/me`)
   }
-  
 };
-
-// axios
-// .delete(
-//   `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-//   {
-//     withCredentials: true,
-//     headers: {
-//       'API-KEY': '89e45cc4-a7b2-4ec6-95c2-842d8cade3ec',
-//     },
-//   }
-// )
-// .then((response) => {
-//   if (response.data.resultCode === 0) {
-//     props.unfollow(u.id);
-//   }
-// });

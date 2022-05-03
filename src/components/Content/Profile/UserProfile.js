@@ -5,6 +5,7 @@ import ketty from '../../../pic/ketty.jpg';
 
 const UserProfile = (props) => {
  if (!props.profile) {
+   //x=PreloaderGif
    return <x/>
  }
   return (
@@ -12,7 +13,6 @@ const UserProfile = (props) => {
       <div className={s.Profile}>
         <div className={s.AvaInf}>
           <div>
-            {/* <img src={props.profile.photos.small} /> */}
             <img
                   alt=""
                   src={props.profile.photos.small != null ? props.profile.photos.small : ketty}

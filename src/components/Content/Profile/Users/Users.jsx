@@ -1,7 +1,5 @@
-// import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import { usersAPI } from '../../../../api/api';
 import ketty from '../../../../pic/ketty.jpg';
 import s from './Users.module.css';
 
@@ -12,7 +10,6 @@ let Users = (props) => {
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
-
   return (
     <div>
       <div className={s.pagesNumber}>
@@ -51,43 +48,20 @@ let Users = (props) => {
             {/* <div>{'u.location.country'}</div>
             <div>{'u.location.city'}</div> */}
           </span>
+
           <span>
             <div>
-              {u.followed ? (
-                <button
-                  disabled={props.isButtonDisable.some((id) => id === u.id )}
-                  onClick={() => {
-                    props.unfollowThunk(u.id)
-
-                    // props.setButtonDisable(true, u.id);
-                    // usersAPI.getUsersUnfollow(u.id).then((respons) => {
-                    //   if (respons.data.resultCode === 0) {
-                    //     props.unfollow(u.id);
-                    //   }
-                    //   props.setButtonDisable(false, u.id);
-                    // });
-                  }}
-                >
-                  Unfollow
-                </button>
-              ) : (
-                <button
+              {u.followed 
+                ? (<button
                   disabled={props.isButtonDisable.some((id) => id === u.id)}
                   onClick={() => {
-                    props.followThunk(u.id)
-
-                    // props.setButtonDisable(true, u.id);
-                    // usersAPI.getUsersFollow(u.id).then((respons) => {
-                    //   if (respons.data.resultCode === 0) {
-                    //     props.follow(u.id);
-                    //   }
-                    //   props.setButtonDisable(false, u.id);
-                    // });
-                  }}
-                >
-                  Follow
-                </button>
-              )}
+                    props.unfollowThunk(u.id);
+                  }}>Unfollow</button>) 
+                : (<button
+                  disabled={props.isButtonDisable.some((id) => id === u.id)}
+                  onClick={() => {
+                    props.followThunk(u.id);
+                  }}>Follow</button>)}
             </div>
           </span>
         </div>
