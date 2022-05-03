@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Profile.module.css';
-// import Spitz from '../../../pic/Spitz.jpg';
+import ketty from '../../../pic/ketty.jpg';
 // import PreloaderGif from '../../../common/preloader/PreloaderGif'
 
 const UserProfile = (props) => {
@@ -12,7 +12,11 @@ const UserProfile = (props) => {
       <div className={s.Profile}>
         <div className={s.AvaInf}>
           <div>
-            <img src={props.profile.photos.small} />
+            {/* <img src={props.profile.photos.small} /> */}
+            <img
+                  alt=""
+                  src={props.profile.photos.small != null ? props.profile.photos.small : ketty}
+                />
           </div>
           {/* Ava and prfl inf */}
           <p>{props.profile.fullName}</p>

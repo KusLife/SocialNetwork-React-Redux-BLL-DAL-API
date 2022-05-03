@@ -1,10 +1,12 @@
+import { usersAPI } from '../api/api';
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const TOTAL_USERS_COUNT = 'TOTAL_USERS_COUNT';
 const IS_FETCHING = 'IS_FETCHING';
-const IS_BUTTON_DISABLE = 'IS_BUTTON_DISABLE'
+const IS_BUTTON_DISABLE = 'IS_BUTTON_DISABLE';
 
 let initialState = {
   users: [],
@@ -50,9 +52,12 @@ const usersReducer = (state = initialState, action) => {
       return { ...state, isFetching: action.isFetching };
     }
     case IS_BUTTON_DISABLE: {
-      return { ...state, isButtonDisable: action.inProces 
-        ? [...state.isButtonDisable, action.userId] 
-        : state.isButtonDisable.filter(id => id !== action.userId)  };
+      return {
+        ...state,
+        isButtonDisable: action.inProces
+          ? [...state.isButtonDisable, action.userId]
+          : state.isButtonDisable.filter((id) => id !== action.userId),
+      };
     }
     default:
       return state;
@@ -76,7 +81,61 @@ export const setIsFetching = (isFetching) => ({
 });
 
 export const setButtonDisable = (inProces, userId) => ({
-  type: IS_BUTTON_DISABLE, inProces, userId
-})
+  type: IS_BUTTON_DISABLE,
+  inProces,
+  userId,
+});
+
+export const getUsersThunkCreator = (pageNumber, currentPage, pageSize) => {
+  return (dispatch) => {
+    dispatch(setIsFetching(true));
+
+    usersAPI.getUsers(pageNumber, currentPage, pageSize).then((data) => {
+      dispatch(setUsers(data.items));
+      dispatch(setTotalUsersCount(data.totalCount));
+      dispatch(setCurrentPage(pageNumber));
+      dispatch(setIsFetching(false));
+    });
+  };
+};
+
+export const unfollowThunk = (id) => {
+  return (dispatch) => {
+    dispatch(setButtonDisable(true, id));
+    usersAPI.getUsersUnfollow(id).then((respons) => {
+      if (respons.data.resultCode === 0) {
+        dispatch(unfollow(id));
+      }
+      dispatch(setButtonDisable(false, id));
+    });
+  };
+};
+export const followThunk = (id) => {
+  return (dispatch) => {
+    dispatch(setButtonDisable(true, id));
+    usersAPI.getUsersFollow(id).then((respons) => {
+      if (respons.data.resultCode === 0) {
+        dispatch(follow(id));
+      }
+      dispatch(setButtonDisable(false, id));
+    });
+  };
+};
+
+
+
+
+
+// export const onPageChange = (pagesNumber, pageSize) => {
+//   return (dispatch) => {
+//     dispatch(setIsFetching(true));
+//     dispatch(setCurrentPage(pagesNumber));
+
+//     usersAPI.getUsers(pagesNumber, pageSize).then((data) => {
+//       dispatch(setUsers(data.items));
+//       dispatch(setIsFetching(false));
+//     });
+//   };
+// };
 
 export default usersReducer;

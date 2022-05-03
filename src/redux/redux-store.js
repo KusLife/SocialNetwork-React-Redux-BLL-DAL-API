@@ -1,8 +1,9 @@
-import { combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import postEvReducer from './post-ev-reducer';
 import messageReducer from './messege-reducer';
 import usersReducer from './users-reducer';
 import authUserReducer from './auth-reducer';
+import thunkMiddleware from 'redux-thunk';
 
 const reducers = combineReducers({
   eventsData: postEvReducer,
@@ -11,7 +12,7 @@ const reducers = combineReducers({
   auth: authUserReducer,
 });
 
-const store = createStore(reducers);
+const store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 
 

@@ -1,17 +1,19 @@
 import React from 'react';
 import AuthUserData from './AuthUserData';
 import { connect } from 'react-redux';
-import { authUserDataAC } from '../../../../../redux/auth-reducer';
-import { usersAPI } from '../../../../../api/api';
+import { authUserDataAC, myAuthent } from '../../../../../redux/auth-reducer';
+// import { usersAPI } from '../../../../../api/api';
 
 class AuthDataContainer extends React.Component {
   componentDidMount() {
-    usersAPI.getMyAuthent().then((data) => {
-        if (data.resultCode === 0) {
-          let { id, email, login } = data.data;
-          this.props.authUserDataAC(id, email, login);
-        }
-      });
+    this.props.myAuthent()
+
+    // usersAPI.getMyAuthent().then((respons) => {
+    //     if (respons.data.resultCode === 0) {
+    //       let { id, email, login } = respons.data.data;
+    //       this.props.authUserDataAC(id, email, login);
+    //     }
+    //   });
   }
 
   render() {
@@ -24,4 +26,4 @@ const mapStateToProps = (state) => ({
   login: state.auth.login,
 });
 
-export default connect(mapStateToProps, { authUserDataAC })(AuthDataContainer);
+export default connect(mapStateToProps, { authUserDataAC, myAuthent })(AuthDataContainer);

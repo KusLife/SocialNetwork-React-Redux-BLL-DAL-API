@@ -14,17 +14,19 @@ export const usersAPI = {
       .get(`users?page=${currentPage}&count=${pageSize}`)
       .then((respons) => respons.data);
   },
+  //Curly brackets in 'post' are not necessary if we use 'axios.create'
   getUsersFollow(id) {
-    return instance.post(`follow/${id}`,{}).then((respons) => respons.data);
+    return instance.post(`follow/${id}`,{})
   },
   getUsersUnfollow(id) {
-    return instance.delete(`follow/${id}`).then((respons) => respons.data);
+    return instance.delete(`follow/${id}`)
   },
+  //This is just an exeple of longer type but the same logic
   getProfile(id) {
     return instance.get(`profile/${id}`).then((respons) => respons.data)
   },
   getMyAuthent() {
-    return instance.get(`auth/me`).then((respons) => respons.data)
+    return instance.get(`auth/me`)
   }
   
 };

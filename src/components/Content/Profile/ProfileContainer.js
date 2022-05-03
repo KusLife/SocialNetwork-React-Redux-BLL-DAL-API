@@ -5,16 +5,19 @@ import {
   onChangeTextAC,
   addPostAC,
   setUserProfile,
+  profileThunk,
 } from '../../../redux/post-ev-reducer';
 import Profile from './Profile';
-import { usersAPI } from '../../../api/api';
+// import { usersAPI } from '../../../api/api';
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    let userId = this.props.router.params.userId;
-    usersAPI.getProfile(userId).then((data) => {
-        this.props.setUserProfile(data);
-      });
+    this.props.profileThunk(this.props.router.params.userId)
+
+    // let userId = this.props.router.params.userId;
+    // usersAPI.getProfile(userId).then((data) => {
+    //     this.props.setUserProfile(data);
+    //   });
   }
   render() {
     return <Profile {...this.props} />;
@@ -36,12 +39,13 @@ function withRouter(Component) {
     let params = useParams();
     return <Component {...props} router={{ location, navigate, params }} />;
   }
-
   return ComponentWithRouterProp;
 }
 
+// firs we add WithRouter to connect (wrapp in)
 export default connect(mapStateToProps, {
   onChangeTextAC,
   addPostAC,
   setUserProfile,
+  profileThunk
 })(withRouter(ProfileContainer));

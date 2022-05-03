@@ -1,3 +1,6 @@
+// import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { usersAPI } from '../api/api';
+
 const ADD_POST_EV = 'ADD_POST_EV';
 const UPDATE_NEW_POST_TXT = 'UPDATE_NEW_POST_TXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -47,5 +50,24 @@ export const setUserProfile = (profile) => ({
   type: SET_USER_PROFILE,
   profile,
 });
+
+export const profileThunk = (userId) => {
+  return (dispatch) => {
+      usersAPI.getProfile(userId).then((data) => {
+        dispatch(setUserProfile(data));
+      });
+    };
+  };
+
+  // function withRouter(Component) {
+  //   function ComponentWithRouterProp(props) {
+  //     let location = useLocation();
+  //     let navigate = useNavigate();
+  //     let params = useParams();
+  //     return <Component {...props} router={{ location, navigate, params }} />;
+  //   }
+  //   return ComponentWithRouterProp;
+  // }
+// };
 
 export default postEvReducer;

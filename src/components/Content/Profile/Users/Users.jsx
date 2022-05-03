@@ -1,7 +1,7 @@
 // import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { usersAPI } from '../../../../api/api';
+// import { usersAPI } from '../../../../api/api';
 import ketty from '../../../../pic/ketty.jpg';
 import s from './Users.module.css';
 
@@ -57,13 +57,15 @@ let Users = (props) => {
                 <button
                   disabled={props.isButtonDisable.some((id) => id === u.id )}
                   onClick={() => {
-                    props.setButtonDisable(true, u.id);
-                    usersAPI.getUsersUnfollow(u.id).then((data) => {
-                      if (data.resultCode === 0) {
-                        props.unfollow(u.id);
-                      }
-                      props.setButtonDisable(false, u.id);
-                    });
+                    props.unfollowThunk(u.id)
+
+                    // props.setButtonDisable(true, u.id);
+                    // usersAPI.getUsersUnfollow(u.id).then((respons) => {
+                    //   if (respons.data.resultCode === 0) {
+                    //     props.unfollow(u.id);
+                    //   }
+                    //   props.setButtonDisable(false, u.id);
+                    // });
                   }}
                 >
                   Unfollow
@@ -72,13 +74,15 @@ let Users = (props) => {
                 <button
                   disabled={props.isButtonDisable.some((id) => id === u.id)}
                   onClick={() => {
-                    props.setButtonDisable(true, u.id);
-                    usersAPI.getUsersFollow(u.id).then((data) => {
-                      if (data.resultCode === 0) {
-                        props.follow(u.id);
-                      }
-                      props.setButtonDisable(false, u.id);
-                    });
+                    props.followThunk(u.id)
+
+                    // props.setButtonDisable(true, u.id);
+                    // usersAPI.getUsersFollow(u.id).then((respons) => {
+                    //   if (respons.data.resultCode === 0) {
+                    //     props.follow(u.id);
+                    //   }
+                    //   props.setButtonDisable(false, u.id);
+                    // });
                   }}
                 >
                   Follow
