@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 import s from './Navigation.module.css';
-import EventsListContainer from '../Content/Events/EventsListContainer';
+import EventsListContainer from '../Content/EventsPage/EventsListContainer';
 import AuthDataContainer from '../Content/Profile/Users/AuthUserData/AuthDataContainer';
 
 export const Navigation = () => {

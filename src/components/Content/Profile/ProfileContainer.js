@@ -9,6 +9,7 @@ import {
 import Profile from './Profile';
 import withAuthRedirect from '../../../hoc/withAuthRedirect';
 import withRouter from '../../../hoc/withRouter';
+import { compose } from 'redux';
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -29,10 +30,11 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps, {
+
+export default compose(connect(mapStateToProps, {
   onChangeTextAC,
   addPostAC,
   setUserProfile,
   profileThunk
-})(withAuthRedirect(withRouter(ProfileContainer)));
+})(withAuthRedirect(withRouter(ProfileContainer))));
 // 

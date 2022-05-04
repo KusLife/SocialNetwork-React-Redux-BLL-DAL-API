@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ketty from '../../../../pic/ketty.jpg';
 import s from './Users.module.css';
 
@@ -10,8 +10,9 @@ let Users = (props) => {
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
-
-  if (!props.isAuth) return <Navigate  to='/login' />
+  //I left it as a remainder of how fun this game is:)) Cuz I 
+  // was looking for a mistake(2h) in the code, why I'm redirected even though I logedin already.
+  // if (!props.isAuth) return <Navigate  to='/login' /> seapmly forgot to clean up:)
   
   return (
     <div>
