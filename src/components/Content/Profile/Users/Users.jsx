@@ -32,10 +32,10 @@ let Users = (props) => {
       </div>
 
       {props.users.map((u) => (
-        <div key={u.id} className={s.Users}>
+        <div  className={s.Users}>
           <span>
             <div className={s.AvaInf}>
-              <Link to={'/profile/' + u.id}>
+              <Link key={u.id} to={'/profile/' + u.id}>
                 <img
                   alt=""
                   src={u.photos.small != null ? u.photos.small : ketty}

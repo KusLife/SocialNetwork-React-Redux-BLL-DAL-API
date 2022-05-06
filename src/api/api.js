@@ -27,5 +27,9 @@ export const usersAPI = {
   },
   getMyAuthent() {
     return instance.get(`auth/me`)
+  },
+  getMyProfile(myId) {
+    // debugger
+    return instance.get(`profile/${myId}`).then((respons) => respons.data)
   }
 };

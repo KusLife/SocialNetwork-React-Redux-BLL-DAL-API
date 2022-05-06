@@ -18,7 +18,7 @@ export const Navigation = () => {
         <div>
           {/* Later on I'd like to make this txt removeble in search txtarea
           And I wanna to hide this part as a slider  */}
-          <textarea value="" ref={searchItem} cols="30" rows="2">
+          <textarea  value="" ref={searchItem} cols="30" rows="2" readOnly>
             Type here
           </textarea>
           <button onClick={searchBar}>Search</button>

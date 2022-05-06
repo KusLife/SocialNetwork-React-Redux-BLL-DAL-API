@@ -2,7 +2,8 @@ import { usersAPI } from '../api/api';
 
 const ADD_POST_EV = 'ADD_POST_EV';
 const UPDATE_NEW_POST_TXT = 'UPDATE_NEW_POST_TXT';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_MY_PROFILE = 'SET_MY_PROFILE';
 
 let initialState = {
   newPostTxt: 'Gime all ur LOVE!',
@@ -14,6 +15,7 @@ let initialState = {
     { key: '', id: 5, data: '3.5.22', ev: 'Queen and King' },
   ],
   profile: null,
+  myProfile: null,
 };
 
 const postEvReducer = (state = initialState, action) => {
@@ -35,6 +37,9 @@ const postEvReducer = (state = initialState, action) => {
     case SET_USER_PROFILE: {
       return { ...state, profile: action.profile };
     }
+    case SET_MY_PROFILE : {
+      return { ...state, myProfile: action.myProfile}
+    }
     default:
       return state;
   }
@@ -49,6 +54,10 @@ export const setUserProfile = (profile) => ({
   type: SET_USER_PROFILE,
   profile,
 });
+export const setMyProfile = (myProfile) => ({type: SET_MY_PROFILE, myProfile})
+
+
+
 
 export const profileThunk = (userId) => {
   return (dispatch) => {
@@ -57,5 +66,14 @@ export const profileThunk = (userId) => {
     });
   };
 };
+
+export const myProfileThunk = (myId) => {
+  // debugger
+  return (dispatch) => {
+    usersAPI.getMyProfile(myId).then((data) => {
+      dispatch(setMyProfile(data))
+    } )
+  } 
+}
 
 export default postEvReducer;

@@ -15,6 +15,7 @@ let initialState = {
   currentPage: 1,
   isFetching: true,
   isButtonDisable: [],
+  
 };
 
 const usersReducer = (state = initialState, action) => {
