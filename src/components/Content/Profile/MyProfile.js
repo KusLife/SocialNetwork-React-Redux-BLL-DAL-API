@@ -14,15 +14,15 @@ const MyProfile = (props) => {
 
 
 
-  let newEventPost = React.createRef();
-  // debugger
-  let addPost = () => {
-    props.addPostAC();
-  };
-  let onChangePost = () => {
-    let text = newEventPost.current.value;
-    props.onChangeTextAC(text);
-  };
+  // let newEventPost = React.createRef();
+  // let addPost = () => {
+  //   props.addPostAC();
+  // };
+  // let onChangePost = () => {
+  //   let text = newEventPost.current.value;
+  //   props.onChangeTextAC(text);
+  // };
+  
   return (
     <div>
       <div className={s.Profile}>
@@ -40,8 +40,9 @@ const MyProfile = (props) => {
           </div>
           {/* Ava and prfl inf */}
           <p>{props.myProfile.fullName}</p>
+          <p>stat  :{props.status}</p>
         </div>
-        <MyProfileStatus status = {'Good jom , my friend!'}/>
+        <MyProfileStatus status = {props.status} updateStatusThunk={props.updateStatusThunk} />
         
         {/* remove this code from here somewhere to events*/}
         {/* <div>Date new EVENT:)</div>

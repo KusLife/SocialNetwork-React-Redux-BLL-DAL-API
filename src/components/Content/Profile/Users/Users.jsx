@@ -4,6 +4,7 @@ import ketty from '../../../../pic/ketty.jpg';
 import s from './Users.module.css';
 
 let Users = (props) => {
+
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
   let pages = [];
@@ -46,7 +47,7 @@ let Users = (props) => {
 
           <span>
             <div>{u.name}</div>
-            <div>{u.status}</div>
+            <div>Status {u.status}</div>
           </span>
           <span>
             {/* <div>{'u.location.country'}</div>

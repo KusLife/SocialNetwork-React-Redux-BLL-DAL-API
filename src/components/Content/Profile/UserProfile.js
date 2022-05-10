@@ -40,7 +40,11 @@ const UserProfile = (props) => {
           </h4>
         </div>
 
-        <div>{props.profile.aboutMe}</div>
+        <div>
+          <p>Stat: {props.profile.status}</p>
+        </div>
+
+        <div>About me: {props.profile.aboutMe}</div>
         <textarea value="" />
         <button>send</button>
       </div>

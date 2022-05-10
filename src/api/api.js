@@ -9,6 +9,7 @@ const instance = axios.create({
 });
 
 export const usersAPI = {
+  //This is just an exeple of longer type but the same logic
   getUsers(currentPage, pageSize) {
     return instance
       .get(`users?page=${currentPage}&count=${pageSize}`)
@@ -16,20 +17,40 @@ export const usersAPI = {
   },
   //Curly brackets in 'post' are not necessary if we use 'axios.create'
   getUsersFollow(id) {
-    return instance.post(`follow/${id}`,{})
+    return instance.post(`follow/${id}`, {});
   },
   getUsersUnfollow(id) {
-    return instance.delete(`follow/${id}`)
+    return instance.delete(`follow/${id}`);
   },
-  //This is just an exeple of longer type but the same logic
+  // it's simply a link to keep backwords compatibility
+  // Obsolete method , plz use "profileAPI"
   getProfile(id) {
-    return instance.get(`profile/${id}`).then((respons) => respons.data)
-  },
-  getMyAuthent() {
-    return instance.get(`auth/me`)
+    return profileAPI.getProfile(id)
   },
   getMyProfile(myId) {
-    // debugger
-    return instance.get(`profile/${myId}`).then((respons) => respons.data)
+    return profileAPI.getMyProfile(myId)
+  },
+};
+
+
+export const profileAPI = {
+  getProfile(id) {
+    return instance.get(`profile/${id}`).then((respons) => respons.data);
+  },
+  // Little difernt spelling of the URI path
+  getMyProfile(myId) {
+    return instance.get(`profile/` + myId).then((respons) => respons.data);
+  },
+  getStatus(id) {
+    return instance.get(`profile/status/${id}`).then((respons) => respons.data);
+  },
+  getUpdatedStatus(status) {
+    return instance.put(`profile/status/`, {status: status}).then((respons) => respons.data);
   }
+}
+
+export const authAPI = {
+  getMyAuthent() {
+    return instance.get(`auth/me`);
+  },
 };
