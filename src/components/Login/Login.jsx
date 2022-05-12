@@ -1,69 +1,44 @@
 import React from 'react';
-import { useFormik } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import s from './Login.module.css';
 
-export default function Login() {
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-      rememberMe: false,
-    },
-    validationSchema: Yup.object({
-      email: Yup.string().email('Invalid email').required('Required'),
-      password: Yup.string()
-        .min(8, 'Use not less then 8 caterters')
-        .required('Required'),
-    }),
-    onSubmit: (values) => {
-      console.log(values);
-    },
-  });
-  // console.log(formik.errors)
-  // console.log(formik.values)
-  return (
-    <form className={s.login} onSubmit={formik.handleSubmit}>
-      <div>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="Email"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
-        />
-        {formik.touched.email && formik.errors.email ? (
-          <p>{formik.errors.email}</p>
-        ) : null}
-      </div>
-      <div>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Password"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.firstName}
-        />
-        {formik.touched.password && formik.errors.password ? (
-          <p>{formik.errors.password}</p>
-        ) : null}
-      </div>
-      <div>
-        <input
-          id="rememberMe"
-          name="rememberMe"
-          type="checkbox"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.rememberMe}
-        />
-      </div>
+const loginFormSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid e-mail').required('Required'),
+  password: Yup.string().min(8, 'Must be longer than 8 characters').required('Required'),
+});
 
-      <button type="submit">Submit</button>
-    </form>
+const Login = () => {
+  return (
+    <div className={s.login}>
+      <h1>Login</h1>
+      <Formik
+        initialValues={{ email: '', password: '', rememberMe: false }}
+        validationSchema={loginFormSchema}
+        onSubmit={(values) => {
+          console.log(values);
+        }}
+      >
+        {() => (
+          <Form>
+            <div>
+              <Field type='email' name='email' placeholder='e-mail' />
+              <ErrorMessage name='email' component='p' />
+            </div>
+            <div>
+              <Field type='password' name='password' placeholder='password' />
+              <ErrorMessage name='password' component='p' />
+            </div>
+            <div>
+              <Field type='checkbox' name='rememberMe' />
+              <label htmlFor='rememberMe'>remember me</label>
+            </div>
+            <button type='submit'>Log in</button>
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
-}
+};
+
+export default Login;
