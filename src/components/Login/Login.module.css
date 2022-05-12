@@ -1,0 +1,13 @@
+.login {
+    background-color: antiquewhite;
+    height: fit-content;
+    padding: 15px;
+    border-radius: 10px;
+}
+.login p {
+    font-size: 12px;
+    color: coral;
+    margin: -2px;
+    padding-left: 5px;
+    padding-bottom: 3px;
+}
