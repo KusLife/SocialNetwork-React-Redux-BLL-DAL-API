@@ -1,5 +1,4 @@
 const ADD_MSG = 'ADD_MSG';
-const UPDATE_NEW_MSG_TXT = 'UPDATE_NEW_MSG_TXT';
 
 let initialState = {
   msgsList: [
@@ -21,23 +20,17 @@ const messageReducer = (state = initialState, action) => {
       let newMsgItem = {
         id: 6,
         time: '15:53',
-        text: state.newMsgTxt,
+        text: action.newMessage,
       };
       return {
         msgsList: [...state.msgsList, newMsgItem],
-        newMsgTxt: '',
-      };
-    case UPDATE_NEW_MSG_TXT:
-      return { ...state, newMsgTxt: action.updateMsgTxt };
-    default:
+      }; 
+      default:
       return state;
   }
 };
 
-export const addMessageActionCreater = () => ({ type: ADD_MSG });
-export const updateMessageActionCreater = (text) => ({
-  type: UPDATE_NEW_MSG_TXT,
-  updateMsgTxt: text,
-});
+export const sendMessageAC = (newMessage) => ({ type: ADD_MSG , newMessage});
+
 
 export default messageReducer;

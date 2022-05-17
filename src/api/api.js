@@ -46,11 +46,18 @@ export const profileAPI = {
   },
   getUpdatedStatus(status) {
     return instance.put(`profile/status/`, {status: status}).then((respons) => respons.data);
-  }
+  },
 }
 
 export const authAPI = {
   getMyAuthent() {
     return instance.get(`auth/me`);
+  },
+  getLogin(email, password, rememberMe) {
+    return instance.post(`auth/login` ,  { email, password, rememberMe });
+    // return instance.post(`auth/login` ,  { email: email}, {password: password}, {rememberMe: rememberMe });
+  },
+  getLogout() {
+    return instance.delete(`auth/login`);
   },
 };

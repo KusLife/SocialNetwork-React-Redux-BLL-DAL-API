@@ -1,14 +1,12 @@
 import { profileAPI, usersAPI } from '../api/api';
 
-const ADD_POST_EV = 'ADD_POST_EV';
-const UPDATE_NEW_POST_TXT = 'UPDATE_NEW_POST_TXT';
+const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_MY_PROFILE = 'SET_MY_PROFILE';
 const SET_STATUS = 'SET_STATUS'
-// const UPDATE_STATUS = 'UPDATE_STATUS'
+
 
 let initialState = {
-  newPostTxt: 'Gime all ur LOVE!',
   eventsList: [
     { key: '', id: 1, data: '2.21.22', ev: 'Meating with Teammembers' },
     { key: '', id: 2, data: '8.3.22', ev: "Women's day" },
@@ -18,25 +16,21 @@ let initialState = {
   ],
   profile: null,
   myProfile: null,
-  status: '',
 };
 
 const postEvReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST_EV:
+    case ADD_POST:
       let newPostEvItem = {
         key: '',
         id: 6,
         data: '11.5.22',
-        ev: state.newPostTxt,
+        ev: action.newPost,
       };
       return {
         eventsList: [...state.eventsList, newPostEvItem],
-        newPostTxt: '',
       };
-    case UPDATE_NEW_POST_TXT: {
-      return { ...state, newPostTxt: action.updateTxt };
-    }
+    
     case SET_USER_PROFILE: {
       return { ...state, profile: action.profile };
     }
@@ -46,20 +40,14 @@ const postEvReducer = (state = initialState, action) => {
     case SET_STATUS : {
       return { ...state, status: action.status}
     }
-    // case UPDATE_STATUS : {
-    //   return { ...state, status: action.status}
-    // }
     default:
       return state;
   }
 };
 
 // Action Creators
-export const addPostAC = () => ({ type: ADD_POST_EV });
-export const onChangeTextAC = (text) => ({
-  type: UPDATE_NEW_POST_TXT,
-  updateTxt: text,
-});
+export const addPostAC = (newPost) => ({ type: ADD_POST, newPost });
+
 export const setUserProfileAC = (profile) => ({
   type: SET_USER_PROFILE,
   profile,
@@ -72,10 +60,6 @@ export const setStatusAC = (status) => ({
   type: SET_STATUS,
   status
 }) 
-// export const updateStatusAC = (status) => ({
-//   type: UPDATE_STATUS,
-//   status
-// })
 
 
 

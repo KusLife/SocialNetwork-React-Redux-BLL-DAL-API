@@ -24,6 +24,9 @@ export const Navigation = () => {
           <button onClick={searchBar}>Search</button>
         </div>
 
+        <div className={(s.item, s.login)}>
+          <AuthDataContainer />
+        </div>
         <div className={(s.item, s.active)}>
           <Link  to="/profile/*">Profile</Link>
         </div>
@@ -42,9 +45,7 @@ export const Navigation = () => {
         <div className={s.item}>
           <Link to="/about">About us</Link>
         </div>
-        <div className={(s.item, s.login)}>
-          <AuthDataContainer />
-        </div>
+       
 
         <Routes>
           <Route path="/eventsList/*" element={<EventsListContainer />} />

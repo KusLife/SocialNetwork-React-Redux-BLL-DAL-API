@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import Events from './Events';
+import { addPostAC } from '../../../redux/post-ev-reducer'
 
 let mapStateToProps = (state) => {
   return {
@@ -7,6 +8,6 @@ let mapStateToProps = (state) => {
   };
 };
 
-const EventsContainer = connect(mapStateToProps)(Events);
+const EventsContainer = connect(mapStateToProps, {addPostAC})(Events);
 
 export default EventsContainer;

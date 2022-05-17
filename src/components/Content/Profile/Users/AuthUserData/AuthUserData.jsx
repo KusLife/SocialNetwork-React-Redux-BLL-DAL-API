@@ -5,8 +5,9 @@ let AuthUserData = (props) => {
   return (
     <div>
       <div>
-        {props.isAuth ? props.login : 
-       <Link to='/login'>Login</Link> }
+        {props.isAuth 
+        ?<div>{props.login} <button onClick={props.logoutThunk}> Log out </button> </div> 
+        : <Link to='/login'>Login</Link> }
       </div>
     </div>
   );

@@ -2,21 +2,28 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import s from './Login.module.css';
+import { loginThunk } from '../../redux/auth-reducer';
+import { connect } from "react-redux";
+import { Navigate } from 'react-router-dom';
 
-const loginFormSchema = Yup.object().shape({
+const loginFormSchema = Yup.object({
   email: Yup.string().email('Invalid e-mail').required('Required'),
   password: Yup.string().min(8, 'Must be longer than 8 characters').required('Required'),
 });
 
-const Login = () => {
+const Login = (props) => {
+
+  if (props.isAuth) return <Navigate to='/profile' />
+  
   return (
     <div className={s.login}>
-      <h1>Login</h1>
+      <h1>Log in</h1>
       <Formik
-        initialValues={{ email: '', password: '', rememberMe: false }}
+        initialValues={{ email: '', password: '', rememberMe: false , messages: null}}
         validationSchema={loginFormSchema}
+       
         onSubmit={(values) => {
-          console.log(values);
+          props.loginThunk(values.email, values.password, values.rememberMe);
         }}
       >
         {() => (
@@ -34,11 +41,16 @@ const Login = () => {
               <label htmlFor='rememberMe'>remember me</label>
             </div>
             <button type='submit'>Log in</button>
+            <p>{props.messageError}</p>
           </Form>
         )}
       </Formik>
     </div>
   );
 };
-
-export default Login;
+let mapStateToProps = (state) => {
+  return{
+    messageError: state.auth.messageError,
+    isAuth : state.auth.isAuth
+}}
+export default connect(mapStateToProps, {loginThunk}) (Login);

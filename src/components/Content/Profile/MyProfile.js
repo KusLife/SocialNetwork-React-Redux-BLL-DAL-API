@@ -11,19 +11,7 @@ const MyProfile = (props) => {
     // return <div>'...'</div>;
      return <PreloaderGif/>
   }
-
-
-
-  // let newEventPost = React.createRef();
-  // let addPost = () => {
-  //   props.addPostAC();
-  // };
-  // let onChangePost = () => {
-  //   let text = newEventPost.current.value;
-  //   props.onChangeTextAC(text);
-  // };
-  
-  return (
+ return (
     <div>
       <div className={s.Profile}>
         <div className={s.AvaInf}>
@@ -43,15 +31,6 @@ const MyProfile = (props) => {
           <p>stat  :{props.status}</p>
         </div>
         <MyProfileStatus status = {props.status} updateStatusThunk={props.updateStatusThunk} />
-        
-        {/* remove this code from here somewhere to events*/}
-        {/* <div>Date new EVENT:)</div>
-        <textarea
-          onChange={onChangePost}
-          ref={newEventPost}
-          value={props.newPostTxt}
-        />
-        <button onClick={addPost}>Add events</button> */}
       </div>
     </div>
   );

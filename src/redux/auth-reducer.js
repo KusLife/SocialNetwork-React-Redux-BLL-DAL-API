@@ -7,6 +7,7 @@ let initialState = {
   email: null,
   login: null,
   isAuth: false,
+  messageError: '',
 };
 
 const authUserReducer = (state = initialState, action) => {
@@ -14,17 +15,16 @@ const authUserReducer = (state = initialState, action) => {
     case SET_USER_DATA:
       return {
         ...state,
-        ...action.data,
-        isAuth: true,
+        ...action.payload,
       };
     default:
       return state;
   }
 };
 
-export const authUserDataAC = (id, email, login) => ({
+export const authUserDataAC = (id, email, login, isAuth, messageError) => ({
   type: SET_USER_DATA,
-  data: { id, email, login },
+  payload: { id, email, login, isAuth, messageError },
 });
 
 export const myAuthent = () => {
@@ -32,7 +32,31 @@ export const myAuthent = () => {
     authAPI.getMyAuthent().then((respons) => {
       if (respons.data.resultCode === 0) {
         let { id, email, login } = respons.data.data;
-        dispatch(authUserDataAC(id, email, login));
+        dispatch(authUserDataAC(id, email, login, true));
+      }
+    });
+  };
+};
+
+export const loginThunk = (email, password, rememberMe) => {
+  return (dispatch) => {
+    authAPI.getLogin(email, password, rememberMe).then((respons) => {
+      if (respons.data.resultCode === 0) {
+        dispatch(myAuthent());
+      } else {
+        dispatch(
+          authUserDataAC(null, null, null, false, respons.data.messages)
+        );
+      }
+    });
+  };
+};
+
+export const logoutThunk = () => {
+  return (dispatch) => {
+    authAPI.getLogout().then((respons) => {
+      if (respons.data.resultCode === 0) {
+        dispatch(myAuthent(null, null, null, false));
       }
     });
   };

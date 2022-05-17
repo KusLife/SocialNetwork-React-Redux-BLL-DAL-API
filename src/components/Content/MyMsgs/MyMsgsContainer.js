@@ -1,7 +1,4 @@
-import {
-  addMessageActionCreater,
-  updateMessageActionCreater,
-} from '../../../redux/messege-reducer';
+import { sendMessageAC } from '../../../redux/messege-reducer';
 import { MyMsgs } from './MyMsgs';
 import { connect } from 'react-redux';
 import withAuthRedirect from '../../../hoc/withAuthRedirect';
@@ -10,21 +7,22 @@ let mapStateToProps = (state) => {
   return {
     msgsList: state.msgsData.msgsList,
     newMsgTxt: state.msgsData.newMsgTxt,
-  
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    addMsgTxt: () => {
-      dispatch(addMessageActionCreater());
-    },
-    onChangeMsgTxt: (text) => {
-      dispatch(updateMessageActionCreater(text));
-    },
-  };
-};
+// Extra code for better readind and understanding
+// but I put the AC straight making same varieble
+// let mapDispatchToProps = (dispatch) => {
+//   return {
+//     sendMessage: (values) => {
+//       dispatch(sendMessageAC(values.newMessage));
+//     },
+//   };
+// };
 
-const MyMsgsContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(MyMsgs));
+const MyMsgsContainer = connect(
+  mapStateToProps,
+  {sendMessageAC}
+)(withAuthRedirect(MyMsgs));
 
 export default MyMsgsContainer;
