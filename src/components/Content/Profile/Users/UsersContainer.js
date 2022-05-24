@@ -8,7 +8,7 @@ import {
 import Users from './Users';
 import PreloaderGif from '../../../../common/preloader/PreloaderGif';
 import { compose } from 'redux';
-import withAuthRedirect from '../../../../hoc/withAuthRedirect';
+import { slctCurrentPage, slctIsButtonDisable, slctIsFetching, slctPageSize, slctTotalUsersCount, slctUsers } from '../../../../redux/users-selectors';
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -41,14 +41,26 @@ class UsersContainer extends React.Component {
   }
 }
 
+// const mapStateToProps = (state) => {
+//   return {
+//     users: state.usersData.users,
+//     pageSize: state.usersData.pageSize,
+//     totalUsersCount: state.usersData.totalUsersCount,
+//     currentPage: state.usersData.currentPage,
+//     isFetching: state.usersData.isFetching,
+//     isButtonDisable: state.usersData.isButtonDisable,
+//   };
+// };
+
+
 const mapStateToProps = (state) => {
   return {
-    users: state.usersData.users,
-    pageSize: state.usersData.pageSize,
-    totalUsersCount: state.usersData.totalUsersCount,
-    currentPage: state.usersData.currentPage,
-    isFetching: state.usersData.isFetching,
-    isButtonDisable: state.usersData.isButtonDisable,
+    users: slctUsers(state),
+    pageSize: slctPageSize(state),
+    totalUsersCount: slctTotalUsersCount(state),
+    currentPage: slctCurrentPage(state),
+    isFetching: slctIsFetching(state),
+    isButtonDisable: slctIsButtonDisable(state),
   };
 };
 
@@ -56,4 +68,4 @@ export default connect(mapStateToProps, {
   followThunk,
   unfollowThunk,
   getUsersThunkCreator,
-})(compose(withAuthRedirect((UsersContainer))))
+})(compose((UsersContainer)))

@@ -10,7 +10,6 @@ function withAuthRedirect(Component) {
   return connectedAuthRedirect;
 }
 
-//so far we don need it
 let mapStateToPropsRedirec = (state) => ({ isAuth: state.auth.isAuth });
 
 export default withAuthRedirect;

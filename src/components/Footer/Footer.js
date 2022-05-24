@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Footer.module.css';
 
-export const Footer = () => {
+export default function Footer()  {
   return (
     <div className={s.Footer}>
       {/* logo and property info */}

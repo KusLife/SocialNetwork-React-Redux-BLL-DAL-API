@@ -15,11 +15,7 @@ import withRouter from '../../../hoc/withRouter';
 class ProfileContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.router.params.userId;
-    // if (!userId ) {
-    //   userId = 23641
-    // }
-    let myId = 23641;
-    // let myId = 23761
+    let myId = this.props.myId
 
     this.props.profileThunk(userId);
     this.props.myProfileThunk(myId);
@@ -32,9 +28,10 @@ class ProfileContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    profile: state.eventsData.profile,
     myProfile: state.eventsData.myProfile,
+    profile: state.eventsData.profile,
     status: state.eventsData.status,
+    myId: state.auth.id,
   };
 };
 //this data is in the 'post-ev-reducer'
@@ -45,5 +42,4 @@ export default connect(mapStateToProps, {
   updateStatusThunk,
   profileThunk,
   myProfileThunk,
-})(withAuthRedirect(withRouter(ProfileContainer)));
-//
+})(withRouter(withAuthRedirect(ProfileContainer)));

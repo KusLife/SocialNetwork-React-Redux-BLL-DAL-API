@@ -5,8 +5,9 @@ import ketty from '../../../pic/ketty.jpg';
 
 const UserProfile = (props) => {
   if (!props.profile) {
-    return <div>'...'</div>;
-    //  return <PreloaderGif/>
+    return <div></div>;
+    // As well here I can see my profile instead
+    //  return <PreloaderGif/> 
   }
   return (
     <div>
@@ -28,20 +29,20 @@ const UserProfile = (props) => {
         <div>
           <h4>
             Looking for a job:
-            <h5>{props.profile.lookingForAJobDescription}</h5>
+            <p>{props.profile.lookingForAJobDescription}</p>
           </h4>
         </div>
 
         <div>
           <h4>
             My contacts:
-            <h5>{props.profile.contacts.facebook}</h5>
-            <h5>{props.profile.contacts.instagram}</h5>
+            <p>{props.profile.contacts.facebook}</p>
+            <p>{props.profile.contacts.instagram}</p>
           </h4>
         </div>
 
         <div>
-          <p>Stat: {props.profile.status}</p>
+          <p>Status: {props.profile.status}</p>
         </div>
 
         <div>About me: {props.profile.aboutMe}</div>

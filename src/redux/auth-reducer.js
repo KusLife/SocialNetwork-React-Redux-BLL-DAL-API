@@ -22,7 +22,7 @@ const authUserReducer = (state = initialState, action) => {
   }
 };
 
-export const authUserDataAC = (id, email, login, isAuth, messageError) => ({
+const authUserDataAC = (id, email, login, isAuth, messageError) => ({
   type: SET_USER_DATA,
   payload: { id, email, login, isAuth, messageError },
 });

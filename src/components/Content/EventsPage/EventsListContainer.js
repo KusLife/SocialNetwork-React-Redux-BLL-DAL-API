@@ -8,6 +8,7 @@ let mapStateToProps = (state) => {
   };
 };
 
+// const EventsListContainer = connect(mapStateToProps)(EventsList);
 const EventsListContainer = connect(mapStateToProps)(withAuthRedirect(EventsList));
 
 export default EventsListContainer;

@@ -3,7 +3,7 @@ import handHart from '../../pic/handHart.png';
 import s from './Header.module.css';
 
 
-export const Header = () => {
+export default function Header() {
   return (
   <div className={s.Header}>
         <div className={s.slideBox}>

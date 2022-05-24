@@ -10,19 +10,9 @@ let mapStateToProps = (state) => {
   };
 };
 
-// Extra code for better readind and understanding
-// but I put the AC straight making same varieble
-// let mapDispatchToProps = (dispatch) => {
-//   return {
-//     sendMessage: (values) => {
-//       dispatch(sendMessageAC(values.newMessage));
-//     },
-//   };
-// };
-
 const MyMsgsContainer = connect(
   mapStateToProps,
   {sendMessageAC}
-)(withAuthRedirect(MyMsgs));
+)(MyMsgs);
 
-export default MyMsgsContainer;
+export default withAuthRedirect(MyMsgsContainer);

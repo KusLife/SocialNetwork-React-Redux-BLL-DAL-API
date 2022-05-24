@@ -3,8 +3,7 @@ import { Link, Routes, Route } from 'react-router-dom';
 import s from './Navigation.module.css';
 import EventsListContainer from '../Content/EventsPage/EventsListContainer';
 import AuthDataContainer from '../Content/Profile/Users/AuthUserData/AuthDataContainer';
-
-export const Navigation = () => {
+const Navigation = () => {
   let searchItem = React.createRef();
 
   let searchBar = () => {
@@ -18,7 +17,7 @@ export const Navigation = () => {
         <div>
           {/* Later on I'd like to make this txt removeble in search txtarea
           And I wanna to hide this part as a slider  */}
-          <textarea  value="" ref={searchItem} cols="30" rows="2" readOnly>
+          <textarea value="" ref={searchItem} cols="30" rows="2" readOnly>
             Type here
           </textarea>
           <button onClick={searchBar}>Search</button>
@@ -28,7 +27,7 @@ export const Navigation = () => {
           <AuthDataContainer />
         </div>
         <div className={(s.item, s.active)}>
-          <Link  to="/profile/*">Profile</Link>
+          <Link to="/profile/*">Profile</Link>
         </div>
         <div className={s.item}>
           <Link to="/users">Users</Link>
@@ -45,7 +44,6 @@ export const Navigation = () => {
         <div className={s.item}>
           <Link to="/about">About us</Link>
         </div>
-       
 
         <Routes>
           <Route path="/eventsList/*" element={<EventsListContainer />} />
@@ -53,4 +51,6 @@ export const Navigation = () => {
       </div>
     </>
   );
-};
+}
+
+export default Navigation

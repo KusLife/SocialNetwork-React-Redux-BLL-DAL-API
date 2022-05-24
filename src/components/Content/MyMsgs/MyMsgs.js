@@ -6,7 +6,7 @@ import { Navigate } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 
 export const MyMsgs = (props) => {
-  if (!props.isAuth) return <Navigate to="/login" />;
+  // if (!props.isAuth) return <Navigate to="/login" />;
 
   let MsgElements = props.msgsList.map((it) => (
     <Msgs key={it.id} id={it.id} text={it.text} time={it.time} />

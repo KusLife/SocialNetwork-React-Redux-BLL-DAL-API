@@ -2,13 +2,11 @@ import React from 'react';
 import s from './Profile.module.css';
 import Spitz from '../../../pic/Spitz.jpg';
 import PreloaderGif from '../../../common/preloader/PreloaderGif';
-import MyProfileStatus from './MyProfileStatus';
+import MyProfileStatusHooks from './MyProfileStatusHooks';
 
-//myId = 23641}
 
 const MyProfile = (props) => {
   if (!props.myProfile) {
-    // return <div>'...'</div>;
      return <PreloaderGif/>
   }
  return (
@@ -16,7 +14,6 @@ const MyProfile = (props) => {
       <div className={s.Profile}>
         <div className={s.AvaInf}>
           <div>
-            {/* <img src={Spitz} /> */}
             <img
               alt=""
               src={
@@ -30,7 +27,7 @@ const MyProfile = (props) => {
           <p>{props.myProfile.fullName}</p>
           <p>stat  :{props.status}</p>
         </div>
-        <MyProfileStatus status = {props.status} updateStatusThunk={props.updateStatusThunk} />
+        <MyProfileStatusHooks status = {props.status} updateStatusThunk={props.updateStatusThunk} />
       </div>
     </div>
   );
