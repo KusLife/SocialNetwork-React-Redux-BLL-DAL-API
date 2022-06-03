@@ -11,9 +11,9 @@ const loginFormSchema = Yup.object({
   password: Yup.string().min(8, 'Must be longer than 8 characters').required('Required'),
 });
 
-const Login = (props) => {
-
-  if (props.isAuth) return <Navigate to='/profile/*' />
+const Login = ({isAuth, loginThunk, messageError}) => {
+  // Renavigator , but we could applay HOC instead
+  if (isAuth) return <Navigate to='/profile/*' />
   
   return (
     <div className={s.login}>
@@ -23,7 +23,7 @@ const Login = (props) => {
         validationSchema={loginFormSchema}
        
         onSubmit={(values) => {
-          props.loginThunk(values.email, values.password, values.rememberMe);
+          loginThunk(values.email, values.password, values.rememberMe);
         }}
       >
         {() => (
@@ -41,7 +41,7 @@ const Login = (props) => {
               <label htmlFor='rememberMe'>remember me</label>
             </div>
             <button type='submit'>Log in</button>
-            <p>{props.messageError}</p>
+            <p>{messageError}</p>
           </Form>
         )}
       </Formik>

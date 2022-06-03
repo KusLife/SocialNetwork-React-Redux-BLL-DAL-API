@@ -6,7 +6,7 @@ import ketty from '../../../pic/ketty.jpg';
 const UserProfile = (props) => {
   if (!props.profile) {
     return <div></div>;
-    // As well here I can see my profile instead
+    // As well here I can set my profile instead
     //  return <PreloaderGif/> 
   }
   return (

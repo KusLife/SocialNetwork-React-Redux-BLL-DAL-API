@@ -1,10 +1,10 @@
 import { profileAPI, usersAPI } from '../api/api';
 
 const ADD_POST = 'ADD_POST';
-const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_MY_PROFILE = 'SET_MY_PROFILE';
-const SET_STATUS = 'SET_STATUS'
-
+const SET_STATUS = 'SET_STATUS';
+const DELETE_POST = 'DELETE_POST';
 
 let initialState = {
   eventsList: [
@@ -30,15 +30,21 @@ const postEvReducer = (state = initialState, action) => {
       return {
         eventsList: [...state.eventsList, newPostEvItem],
       };
-    
+
     case SET_USER_PROFILE: {
       return { ...state, profile: action.profile };
     }
-    case SET_MY_PROFILE : {
-      return { ...state, myProfile: action.myProfile}
+    case SET_MY_PROFILE: {
+      return { ...state, myProfile: action.myProfile };
     }
-    case SET_STATUS : {
-      return { ...state, status: action.status}
+    case SET_STATUS: {
+      return { ...state, status: action.status };
+    }
+    case DELETE_POST: {
+      return {
+        ...state,
+        eventsList: state.eventsList.filter((p) => p.id !== action.postId),
+      };
     }
     default:
       return state;
@@ -53,49 +59,40 @@ export const setUserProfileAC = (profile) => ({
   profile,
 });
 export const setMyProfileAC = (myProfile) => ({
-  type: SET_MY_PROFILE, 
-  myProfile
-})
+  type: SET_MY_PROFILE,
+  myProfile,
+});
 export const setStatusAC = (status) => ({
   type: SET_STATUS,
-  status
-}) 
+  status,
+});
+export const delitPostAC = (postId) => ({ type: DELETE_POST, postId });
 
-
-
-// Thunks
-export const profileThunk = (userId) => {
-  return (dispatch) => {
-    usersAPI.getProfile(userId).then((data) => {
-      dispatch(setUserProfileAC(data));
-    });
-  };
+// Thunk with async await
+export const profileThunk = (userId) => async (dispatch) => {
+  let data = await usersAPI.getProfile(userId);
+  dispatch(setUserProfileAC(data));
 };
 
-export const myProfileThunk = (myId) => {
-  return (dispatch) => {
-    usersAPI.getMyProfile(myId).then((data) => {
-      dispatch(setMyProfileAC(data))
-    } )
-  } 
-}
+export const myProfileThunk = (myId) => async (dispatch) => {
+  let data = await usersAPI.getMyProfile(myId);
+  dispatch(setMyProfileAC(data));
+};
 
-export const statusThunk = (id) => {
-  return (dispatch) => {
-    profileAPI.getStatus(id).then((data) => {
-      dispatch(setStatusAC(data))
-    })
-  }
-}
+// A Thunk with 'then' using in code
+export const statusThunk = (id) => (dispatch) => {
+  profileAPI.getStatus(id).then((data) => {
+    dispatch(setStatusAC(data));
+  });
+};
 
-export const updateStatusThunk = (status) => {
-  return (dispatch) => {
-    profileAPI.getUpdatedStatus(status).then((data) => {
-      if (data.resultCode === 0) {
-        dispatch(setStatusAC(status))
-      }
-    })
+// A Thunk using 'then' in code
+export const updateStatusThunk = (status) => async (dispatch) => {
+  let data = await profileAPI.getUpdatedStatus(status);
+
+  if (data.resultCode === 0) {
+    dispatch(setStatusAC(status));
   }
-}
+};
 
 export default postEvReducer;

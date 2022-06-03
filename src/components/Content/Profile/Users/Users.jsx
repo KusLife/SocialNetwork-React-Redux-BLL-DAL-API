@@ -1,76 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import ketty from '../../../../pic/ketty.jpg';
-import s from './Users.module.css';
+import Pagenator from '../../../../common/Pagenator/Pagenator';
+import User from './User';
+
 
 let Users = (props) => {
-
-  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-
-  let pages = [];
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-  }
-  //I left it as a remainder of how fun this game is:)) Cuz I 
-  // was looking for a mistake(2h) in the code, why I'm redirected even though I logedin already.
-  // if (!props.isAuth) return <Navigate  to='/login' /> seapmly forgot to clean up:)
-  
   return (
     <div>
-      <div className={s.pagesNumber}>
-        {pages.map((p) => {
-          return (
-            <span
-              className={props.currentPage === p && s.selectedPage}
-              onClick={() => {
-                props.onPageChange(p);
-              }}
-            >
-              {p}
-            </span>
-          );
-        })}
-      </div>
-
-      {props.users.map((u) => (
-        <div  className={s.Users}>
-          <span>
-            <div className={s.AvaInf}>
-              <Link key={u.id} to={'/profile/' + u.id}>
-                <img
-                  alt=""
-                  src={u.photos.small != null ? u.photos.small : ketty}
-                />
-              </Link>
-            </div>
-          </span>
-
-          <span>
-            <div>{u.name}</div>
-            <div>Status {u.status}</div>
-          </span>
-          <span>
-            {/* <div>{'u.location.country'}</div>
-            <div>{'u.location.city'}</div> */}
-          </span>
-
-          <span>
-            <div>
-              {u.followed 
-                ? (<button
-                  disabled={props.isButtonDisable.some((id) => id === u.id)}
-                  onClick={() => {
-                    props.unfollowThunk(u.id);
-                  }}>Unfollow</button>) 
-                : (<button
-                  disabled={props.isButtonDisable.some((id) => id === u.id)}
-                  onClick={() => {
-                    props.followThunk(u.id);
-                  }}>Follow</button>)}
-            </div>
-          </span>
-        </div>
-      ))}
+      <Pagenator
+        totalUsersCount={props.totalUsersCount}
+        pageSize={props.pageSize}
+        currentPage={props.currentPage}
+        onPageChange={props.onPageChange}
+      />
+      <User
+        users={props.users}
+        isButtonDisable={props.isButtonDisable}
+        unfollowThunk={props.unfollowThunk}
+        followThunk={props.followThunk}
+      />
     </div>
   );
 };

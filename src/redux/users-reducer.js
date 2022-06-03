@@ -1,4 +1,5 @@
 import { usersAPI } from '../api/api';
+import { updateObjectHellper } from './users-reducer-helper';
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -22,23 +23,19 @@ const usersReducer = (state = initialState, action) => {
     case FOLLOW:
       return {
         ...state,
-        users: state.users.map((u) => {
-          if (u.id === action.userId) {
-            return { ...u, followed: true };
-          }
-          return u;
+        users: updateObjectHellper(state.users, action.userId, 'id', {
+          followed: true,
         }),
       };
+
     case UNFOLLOW:
       return {
         ...state,
-        users: state.users.map((u) => {
-          if (u.id === action.userId) {
-            return { ...u, followed: false };
-          }
-          return u;
+        users: updateObjectHellper(state.users, action.userId, 'id', {
+          followed: false,
         }),
       };
+      
     case SET_USERS: {
       return { ...state, users: action.users };
     }
@@ -99,27 +96,25 @@ export const getUsersThunkCreator = (pageNumber, currentPage, pageSize) => {
   };
 };
 
-export const unfollowThunk = (id) => {
-  return (dispatch) => {
-    dispatch(setButtonDisable(true, id));
-    usersAPI.getUsersUnfollow(id).then((respons) => {
-      if (respons.data.resultCode === 0) {
-        dispatch(unfollow(id));
-      }
-      dispatch(setButtonDisable(false, id));
-    });
-  };
+const followUnfollowFlow = (dispatch, id, apiMethod, actionCreator) => {
+  dispatch(setButtonDisable(true, id));
+  if (apiMethod.data.resultCode === 0) {
+    dispatch(actionCreator(id));
+  }
+  dispatch(setButtonDisable(false, id));
 };
-export const followThunk = (id) => {
-  return (dispatch) => {
-    dispatch(setButtonDisable(true, id));
-    usersAPI.getUsersFollow(id).then((respons) => {
-      if (respons.data.resultCode === 0) {
-        dispatch(follow(id));
-      }
-      dispatch(setButtonDisable(false, id));
-    });
-  };
+
+export const unfollowThunk = (id) => async (dispatch) => {
+  followUnfollowFlow(
+    dispatch,
+    id,
+    await usersAPI.getUsersUnfollow(id),
+    unfollow
+  );
+};
+
+export const followThunk = (id) => async (dispatch) => {
+  followUnfollowFlow(dispatch, id, await usersAPI.getUsersFollow(id), follow);
 };
 
 export default usersReducer;
