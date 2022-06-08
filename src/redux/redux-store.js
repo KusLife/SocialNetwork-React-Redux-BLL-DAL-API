@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import postEvReducer from './post-ev-reducer';
 import messageReducer from './messege-reducer';
 import usersReducer from './users-reducer';
@@ -14,8 +14,15 @@ const reducers = combineReducers({
   app: appReducer,
 });
 
-const store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers(
+    applyMiddleware(thunkMiddleware)
+  ));
+
+
+window.__store__ = store
 
 
 export default store;
