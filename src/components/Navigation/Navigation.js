@@ -1,8 +1,14 @@
 import React from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 import s from './Navigation.module.css';
-import EventsListContainer from '../Content/EventsPage/EventsListContainer';
 import AuthDataContainer from '../Content/Profile/Users/AuthUserData/AuthDataContainer';
+import PreloaderGif from '../../common/preloader/PreloaderGif';
+
+
+const EventsListContainer = React.lazy(() =>
+  import('../Content/EventsPage/EventsListContainer')
+);
+
 const Navigation = () => {
   let searchItem = React.createRef();
 
@@ -11,6 +17,7 @@ const Navigation = () => {
     alert(request);
   };
 
+ 
   return (
     <>
       <div className={s.Navigation}>
@@ -45,12 +52,14 @@ const Navigation = () => {
           <Link to="/about">About us</Link>
         </div>
 
-        <Routes>
-          <Route path="/eventsList/*" element={<EventsListContainer />} />
-        </Routes>
+        <React.Suspense fallback={<PreloaderGif />}>
+          <Routes>
+            <Route path="/eventsList/*" element={<EventsListContainer />} />
+          </Routes>
+        </React.Suspense>
       </div>
     </>
   );
-}
+};
 
-export default Navigation
+export default Navigation;

@@ -47,13 +47,4 @@ let EventsText = (props) => {
   );
 };
 
-// let newEventPost = React.createRef();
-// let addPost = () => {
-//   props.addPostAC();
-// };
-// let onChangePost = () => {
-//   let text = newEventPost.current.value;
-//   props.onChangeTextAC(text);
-// };
-
 export default Events;

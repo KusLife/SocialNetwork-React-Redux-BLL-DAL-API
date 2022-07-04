@@ -6,24 +6,16 @@ import ContentContainer from './components/Content/ContantPage/ContentContainer'
 import Footer from './components/Footer/Footer';
 import { initialazeAppThunk } from './redux/app-reducer';
 import { connect, Provider } from 'react-redux';
-import PreloaderGif from './common/preloader/PreloaderGif';
 import store from './redux/redux-store';
 import { BrowserRouter } from 'react-router-dom';
-// import { Navigate } from 'react-router-dom';
-// import { compose } from 'redux';
-// import withRouter from './hoc/withRouter';
+
 
 function App(props) {
   props.initialazeAppThunk();
-
-  // useEffect(() => {
-  //   props.initialazeAppThunk()
-  // }, [])
-
-  // if (!this.props.isAuth) return <Navigate to="/login" />;
-  if (!props.isAppInitialazed) {
-    return <PreloaderGif />;
-  }
+  // In case we wanna to check authorisation right at the APP start
+  // if (!props.isAppInitialazed) {
+  //   return <PreloaderGif />;
+  // }
   return (
     <div className="App">
       <Header />
