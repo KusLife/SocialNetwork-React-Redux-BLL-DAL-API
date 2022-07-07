@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/SocialNetwork-React-Redux-BLL-DAL-API/static/css/main.d36a07d3.css",
-    "main.js": "/SocialNetwork-React-Redux-BLL-DAL-API/static/js/main.a6e0e04b.js",
+    "main.js": "/SocialNetwork-React-Redux-BLL-DAL-API/static/js/main.87dc8d70.js",
     "static/js/770.472cfd97.chunk.js": "/SocialNetwork-React-Redux-BLL-DAL-API/static/js/770.472cfd97.chunk.js",
     "static/media/background.jpg": "/SocialNetwork-React-Redux-BLL-DAL-API/static/media/background.79242765a6d7a49a61ae.jpg",
     "static/media/cat1.jpg": "/SocialNetwork-React-Redux-BLL-DAL-API/static/media/cat1.638def9a1fabe346d8ad.jpg",
@@ -11,11 +11,11 @@
     "static/media/handHart.png": "/SocialNetwork-React-Redux-BLL-DAL-API/static/media/handHart.6d174eac0fe49d603b9f.png",
     "index.html": "/SocialNetwork-React-Redux-BLL-DAL-API/index.html",
     "main.d36a07d3.css.map": "/SocialNetwork-React-Redux-BLL-DAL-API/static/css/main.d36a07d3.css.map",
-    "main.a6e0e04b.js.map": "/SocialNetwork-React-Redux-BLL-DAL-API/static/js/main.a6e0e04b.js.map",
+    "main.87dc8d70.js.map": "/SocialNetwork-React-Redux-BLL-DAL-API/static/js/main.87dc8d70.js.map",
     "770.472cfd97.chunk.js.map": "/SocialNetwork-React-Redux-BLL-DAL-API/static/js/770.472cfd97.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d36a07d3.css",
-    "static/js/main.a6e0e04b.js"
+    "static/js/main.87dc8d70.js"
   ]
 }
