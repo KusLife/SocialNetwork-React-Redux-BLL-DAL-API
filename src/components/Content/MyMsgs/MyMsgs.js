@@ -2,7 +2,7 @@ import React from 'react';
 import { Msgs } from './Msgs/Msgs';
 import s from './MyMsgs.module.css';
 import { Respons } from './Msgs/Respons/Respons';
-import { Navigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 
 export const MyMsgs = (props) => {

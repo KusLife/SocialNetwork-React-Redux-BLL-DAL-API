@@ -11,7 +11,7 @@ const loginFormSchema = Yup.object({
   password: Yup.string().min(8, 'Must be longer than 8 characters').required('Required'),
 });
 
-const Login = ({isAuth, loginThunk, messageError}) => {
+const Login = ({isAuth, loginThunk, messageError, captchaURL}) => {
   // Renavigator , but we could applay HOC instead
   if (isAuth) return <Navigate to='/profile/*' />
   
@@ -19,11 +19,11 @@ const Login = ({isAuth, loginThunk, messageError}) => {
     <div className={s.login}>
       <h1>Log in</h1>
       <Formik
-        initialValues={{ email: '', password: '', rememberMe: false , messages: null}}
+        initialValues={{ email: '', password: '', rememberMe: false , messages: null, captcha: null}}
         validationSchema={loginFormSchema}
        
         onSubmit={(values) => {
-          loginThunk(values.email, values.password, values.rememberMe);
+          loginThunk(values.email, values.password, values.rememberMe, values.captcha);
         }}
       >
         {() => (
@@ -42,6 +42,8 @@ const Login = ({isAuth, loginThunk, messageError}) => {
             </div>
             <button type='submit'>Log in</button>
             <p>{messageError}</p>
+            {captchaURL && <img src={captchaURL} alt="captchaURL" /> }
+            {captchaURL && <p><Field type='text' name='captcha' placeholder='Simbols from the picture' /></p> }
           </Form>
         )}
       </Formik>
@@ -51,6 +53,7 @@ const Login = ({isAuth, loginThunk, messageError}) => {
 let mapStateToProps = (state) => {
   return{
     messageError: state.auth.messageError,
-    isAuth : state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaURL: state.auth.captchaURL
 }}
 export default connect(mapStateToProps, {loginThunk}) (Login);

@@ -5,6 +5,8 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_MY_PROFILE = 'SET_MY_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const DELETE_POST = 'DELETE_POST';
+const SAVE_PHOTO = 'SAVE_PHOTO';
+const MESSAGE_ERROR = 'MESSAGE_ERROR';
 
 let initialState = {
   eventsList: [
@@ -16,6 +18,7 @@ let initialState = {
   ],
   profile: null,
   myProfile: null,
+  errorMessage: null,
 };
 
 const postEvReducer = (state = initialState, action) => {
@@ -46,14 +49,22 @@ const postEvReducer = (state = initialState, action) => {
         eventsList: state.eventsList.filter((p) => p.id !== action.postId),
       };
     }
+    case SAVE_PHOTO: {
+      return { ...state, profile: { ...state.profile, photos: action.photos } };
+    }
+    case MESSAGE_ERROR: {
+      return { ...state, errorMessage: action.errorMessage };
+    }
     default:
       return state;
   }
 };
 
 // Action Creators
-export const addPostAC = (newPost) => ({ type: ADD_POST, newPost });
-
+export const addPostAC = (newPost) => ({
+  type: ADD_POST,
+  newPost,
+});
 export const setUserProfileAC = (profile) => ({
   type: SET_USER_PROFILE,
   profile,
@@ -66,9 +77,20 @@ export const setStatusAC = (status) => ({
   type: SET_STATUS,
   status,
 });
-export const delitPostAC = (postId) => ({ type: DELETE_POST, postId });
+export const setMyProfileErrorAC = (errorMessage) => ({
+  type: MESSAGE_ERROR,
+  errorMessage,
+});
+export const delitPostAC = (postId) => ({
+  type: DELETE_POST,
+  postId,
+});
+export const savePhotoAC = (photos) => ({
+  type: SAVE_PHOTO,
+  photos,
+});
 
-// Thunk with async await
+// Thunk with 'async await'
 export const profileThunk = (userId) => async (dispatch) => {
   let data = await usersAPI.getProfile(userId);
   dispatch(setUserProfileAC(data));
@@ -94,5 +116,23 @@ export const updateStatusThunk = (status) => async (dispatch) => {
     dispatch(setStatusAC(status));
   }
 };
+
+export const savePhotoThunk = (file) => async (dispatch) => {
+  let data = await profileAPI.getSavedPhoto(file);
+  if (data.resultCode === 0) {
+    dispatch(savePhotoAC(data.photos));
+  }
+};
+
+export const saveProfileInfoThunk =
+  (infoRormData) => async (dispatch, getState) => {
+    let myId = getState().auth.id;
+    let data = await profileAPI.getSavedProfileInfo(infoRormData);
+    if (data.resultCode === 0) {
+      dispatch(myProfileThunk(myId));
+    } else {
+      dispatch(setMyProfileErrorAC(data.data.messages));
+    }
+  };
 
 export default postEvReducer;

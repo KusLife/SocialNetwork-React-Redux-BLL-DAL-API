@@ -3,9 +3,11 @@ import MyProfile from './MyProfile';
 import UserProfile from './UserProfile';
 
 const Profile = (props) => {
+  
   return (
     <div>
-      <MyProfile myProfile={props.myProfile} {...props}/>
+      <MyProfile isOwner={props.isOwner}
+       myProfile={props.myProfile} {...props}/>
       <UserProfile profile={props.profile}/>
       
     </div>

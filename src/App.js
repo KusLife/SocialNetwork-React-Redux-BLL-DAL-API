@@ -7,7 +7,7 @@ import Footer from './components/Footer/Footer';
 import { initialazeAppThunk } from './redux/app-reducer';
 import { connect, Provider } from 'react-redux';
 import store from './redux/redux-store';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 
 function App(props) {
@@ -37,11 +37,11 @@ const AppContainer = connect(mapStateToProps, { initialazeAppThunk })(App);
 
 const CrazyHocApp = (props) => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Provider store={store}>
         <AppContainer />
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 

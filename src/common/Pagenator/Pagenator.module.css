@@ -1,8 +1,23 @@
 .selectedPage {
   font-weight: bold;
+  padding: 0 6px;
+  background-color: rgb(116, 133, 128);
+  border-radius: 25px;
+
 }
 
 .pagesNumber {
   color: bisque;
+  
 }
 
+span {
+  margin: 0 2px;
+}
+
+.next_btn {
+  border-radius: 25px;
+}
+.prev_btn {
+  border-radius: 25px;
+}

@@ -25,13 +25,12 @@ export const usersAPI = {
   // it's simply a link to keep backwords compatibility
   // Obsolete method , plz use "profileAPI"
   getProfile(id) {
-    return profileAPI.getProfile(id)
+    return profileAPI.getProfile(id);
   },
   getMyProfile(myId) {
-    return profileAPI.getMyProfile(myId)
+    return profileAPI.getMyProfile(myId);
   },
 };
-
 
 export const profileAPI = {
   getProfile(id) {
@@ -45,19 +44,39 @@ export const profileAPI = {
     return instance.get(`profile/status/${id}`).then((respons) => respons.data);
   },
   getUpdatedStatus(status) {
-    return instance.put(`profile/status/`, {status: status}).then((respons) => respons.data);
+    return instance
+      .put(`profile/status/`, { status: status })
+      .then((respons) => respons.data);
   },
-}
+  getSavedPhoto(photoFile) {
+    const formData = new FormData();
+    formData.append('image', photoFile);
+    return instance.put(`profile/photo`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  },
+  getSavedProfileInfo(data) {
+    return instance.put(`/profile`, data);
+  },
+};
 
 export const authAPI = {
   getMyAuthent() {
     return instance.get(`auth/me`);
   },
-  getLogin(email, password, rememberMe) {
-    return instance.post(`auth/login` ,  { email, password, rememberMe });
+  getLogin(email, password, rememberMe, captcha) {
+    return instance.post(`auth/login`, { email, password, rememberMe, captcha});
     // return instance.post(`auth/login` ,  { email: email}, {password: password}, {rememberMe: rememberMe });
   },
   getLogout() {
     return instance.delete(`auth/login`);
   },
 };
+
+export const getCaptchaAPI = {
+  getCaptchaURL() {
+    return instance.get(`security/get-captcha-url`)
+  }
+}

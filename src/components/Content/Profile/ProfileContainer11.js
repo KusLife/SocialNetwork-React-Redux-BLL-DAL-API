@@ -12,28 +12,34 @@ import {
 import Profile from './Profile';
 import withAuthRedirect from '../../../hoc/withAuthRedirect';
 import withRouter from '../../../hoc/withRouter';
-import { useEffect } from 'react';
 
 
-const ProfileContainer = (props) => {
+class ProfileContainer extends React.Component {
 
-  function refreshProfile() {
-    let userId = props.router.params.userId;
-    let myId = props.myId
-
-    props.profileThunk(userId);
-    props.myProfileThunk(myId);
-    props.statusThunk(myId);
+  
+  refreshProfile() {
+    let userId = this.props.router.params.userId;
+    let myId = this.props.myId;
+    
+    this.props.profileThunk(userId);
+    this.props.myProfileThunk(myId);
+    this.props.statusThunk(myId);
   }
 
-  useEffect( () => {
-    refreshProfile()
-  }, [])
+  componentDidMount() {
+    this.refreshProfile()
+  }
 
+  componentDidUpdate(prevProps, prevState) {
+     console.log('did update works')
+    if ( this.props.router.params.userId !== prevProps.router.params.userId || this.props.myId !== prevProps.myId
+    ) {this.refreshProfile()}
+    console.log('after reupdate')
+  }
 
-  {
-    return <Profile {...props}
-    isOwner={props.myId}/>;
+  render() {
+    return <Profile {...this.props}
+    isOwner={this.props.myId}/>;
   }
 }
 
@@ -43,7 +49,6 @@ const mapStateToProps = (state) => {
     profile: state.eventsData.profile,
     status: state.eventsData.status,
     myId: state.auth.id,
-    errorMessage: state.eventsData.errorMessage
   };
 };
 //this data is in the 'post-ev-reducer'

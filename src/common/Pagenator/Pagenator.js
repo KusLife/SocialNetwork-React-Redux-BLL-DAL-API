@@ -23,7 +23,7 @@ let Pagenator = ({
   return (
     <div className={s.pagesNumber}>
       {portionNumber > 1 && (
-        <button
+        <button className={s.prev_btn}
           onClick={() => {
             setPortionNumber(portionNumber - 1);
           }}
@@ -39,7 +39,7 @@ let Pagenator = ({
         .map((p) => {
           return (
             <span
-              className={ cn({ [s.selectedPage]: currentPage === p}, s.pageNumber) }
+              className={ cn({ [s.selectedPage]: currentPage === p}, s.pageNumber )}
               key={p}
               onClick={(e) => {
                 onPageChange(p);
@@ -50,7 +50,7 @@ let Pagenator = ({
           );
         })}
         { portionCount > portionNumber && 
-        <button onClick={ () => { setPortionNumber(portionNumber + 1) }}>NEXT</button>}
+        <button className={s.next_btn} onClick={ () => { setPortionNumber(portionNumber + 1) }}>NEXT</button>}
     </div>
   );
 };
