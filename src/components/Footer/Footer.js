@@ -5,7 +5,7 @@ export default function Footer()  {
   return (
     <div className={s.Footer}>
       {/* logo and property info */}
-      <p> logo and property info</p>
+      <p>&copy; 2024 ProNet Company. All rights reserved.</p>
     </div>
   );
 };
